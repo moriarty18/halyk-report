@@ -1,10 +1,4 @@
-import { 
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -22,8 +16,7 @@ import {
 // Data for charts
 const funnelData = [
   { name: 'Привлечено лидов', value: 2575, fill: 'var(--chart-1)' },
-  { name: 'Авто-одобрение', value: 153, fill: 'var(--chart-2)' },
-  { name: 'Ручной скоринг (M3)', value: 16, fill: 'var(--chart-3)' },
+  { name: 'Одобрено заявок', value: 153, fill: 'var(--chart-2)' },
 ];
 
 const metaAdsComparison = [
@@ -31,49 +24,42 @@ const metaAdsComparison = [
   { name: 'Декабрь 2025', cpl: 0.87 },
 ];
 
-const googleAdsTest = [
+const abTestData = [
   { name: 'Квиз-форма', conversion: 7.03, cpl: 3.37 },
   { name: 'Обычная форма', conversion: 1.71, cpl: 6.82 },
 ];
 
 const channelData = [
-  { name: 'Organic + Direct', leads: 853, approved: 125, rate: 14.6, comment: 'Включает 16 заявок, одобренных вручную (M3)' },
-  { name: 'Push (OnlineBank)', leads: 132, approved: 1, rate: 0.8, comment: 'Новый канал, ожидаем статистику от банка' },
-  { name: 'WABA', leads: 73, approved: 8, rate: 11.0, comment: 'Реактивация базы работает отлично' },
-  { name: 'Kolesa.kz', leads: 817, approved: 16, rate: 2.0, comment: 'Стабильный источник объема' },
-  { name: 'Google Ads', leads: 716, approved: 17, rate: 2.4, comment: 'Квиз повышает качество' },
-  { name: 'Meta Ads', leads: 38, approved: 0, rate: 0, comment: 'Заявки еще на скоринге (запуск в конце месяца)' },
+  { name: 'Organic', leads: 853, approved: 109, rate: 12.8 },
+  { name: 'WABA', leads: 73, approved: 8, rate: 11.0 },
+  { name: 'Kolesa.kz', leads: 817, approved: 16, rate: 2.0 },
+  { name: 'Google Ads', leads: 716, approved: 17, rate: 2.4 },
+  { name: 'Meta Ads', leads: 38, approved: 0, rate: 0 },
 ];
 
 const wabaFunnel = [
   { name: 'Отправлено', value: 1100 },
   { name: 'Прочитано', value: 906 },
-  { name: 'Клики', value: 179 },
-  { name: 'Лиды', value: 73 },
+  { name: 'Кликнули', value: 179 },
+  { name: 'Заявки', value: 73 },
+  { name: 'Одобрено', value: 8 },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background font-sans text-foreground">
       {/* Header */}
-      <header className="border-b bg-card sticky top-0 z-10">
-        <div className="container mx-auto py-4 px-4 md:px-6 flex items-center justify-between">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="bg-primary text-primary-foreground p-2 rounded-lg">
-              <LayoutDashboard className="h-5 w-5" />
-            </div>
-            <div>
-              <h1 className="font-bold text-lg leading-none">Halyk Leasing</h1>
-              <p className="text-xs text-muted-foreground">Monthly Report</p>
-            </div>
+            <div className="h-8 w-8 rounded bg-primary flex items-center justify-center text-primary-foreground font-bold">H</div>
+            <span className="font-bold text-lg tracking-tight">Halyk Leasing</span>
           </div>
-          
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
             <a href="#summary" className="hover:text-foreground transition-colors">Итоги</a>
             <a href="#meta" className="hover:text-foreground transition-colors">Meta Ads</a>
             <a href="#google" className="hover:text-foreground transition-colors">Google Ads</a>
             <a href="#waba" className="hover:text-foreground transition-colors">WABA</a>
-            <a href="#push" className="hover:text-foreground transition-colors">Push</a>
             <a href="#creatives" className="hover:text-foreground transition-colors">Креативы</a>
             <a href="#roadmap" className="hover:text-foreground transition-colors">Планы</a>
           </nav>
@@ -83,28 +69,26 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 container mx-auto py-8 px-4 md:px-6 space-y-12">
+      <main className="container py-10 space-y-16">
         
-        {/* Executive Summary */}
+        {/* Hero Section */}
         <section id="summary" className="space-y-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight">Ключевые результаты</h2>
-              <p className="text-muted-foreground mt-1">Период: 1-26 декабря 2025</p>
-            </div>
-            <Badge variant="outline" className="text-green-600 border-green-600 bg-green-50 px-3 py-1">
-              <TrendingUp className="h-3 w-3 mr-1" /> Эффективность выросла
-            </Badge>
+          <div className="space-y-2">
+            <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl">Ежемесячный отчет по лидогенерации</h1>
+            <p className="text-xl text-muted-foreground">
+              Ключевые показатели эффективности за период 1–26 декабря 2025
+            </p>
           </div>
 
+          {/* Key Metrics Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Card>
+            <Card className="bg-primary text-primary-foreground border-none shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Всего лидов</CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-medium text-primary-foreground/90">Привлечено лидов</CardTitle>
+                <Users className="h-4 w-4 text-primary-foreground/70" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">2,575</div>
+                <div className="text-3xl font-bold">2 575</div>
                 <p className="text-xs text-primary-foreground/70 mt-1">Потенциальных клиентов</p>
               </CardContent>
             </Card>
@@ -115,98 +99,46 @@ export default function Home() {
                 <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">169</div>
-                <p className="text-xs text-muted-foreground mt-1">153 Авто + 16 Ручной скоринг (M3)</p>
-                <div className="mt-2 text-[10px] bg-yellow-50 text-yellow-800 px-2 py-1 rounded border border-yellow-100">
-                  M3 повысил одобрение на 9.5%
-                </div>
+                <div className="text-3xl font-bold">153</div>
+                <p className="text-xs text-muted-foreground mt-1">5.9% конверсия в одобрение</p>
               </CardContent>
             </Card>
             
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Стоимость лида (Meta)</CardTitle>
-                <Target className="h-4 w-4 text-muted-foreground" />
+                <TrendingDown className="h-4 w-4 text-green-600" />
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-green-600">$0.87</div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  <span className="text-green-600 flex items-center inline-flex">
-                    <ArrowDownRight className="h-3 w-3 mr-1" /> -89%
-                  </span> от среднего ($7.92)
-                </p>
+                <p className="text-xs text-muted-foreground mt-1">↓ в 9 раз дешевле (было $7.92)</p>
               </CardContent>
             </Card>
             
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Конверсия (Quiz)</CardTitle>
-                <MousePointerClick className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-medium">Эффективность квиза</CardTitle>
+                <Target className="h-4 w-4 text-blue-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-blue-600">7.03%</div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  <span className="text-green-600 flex items-center inline-flex">
-                    <ArrowUpRight className="h-3 w-3 mr-1" /> +312%
-                  </span> vs обычная форма
-                </p>
+                <div className="text-3xl font-bold text-blue-600">+312%</div>
+                <p className="text-xs text-muted-foreground mt-1">vs обычная форма на сайте</p>
               </CardContent>
             </Card>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-7">
-            <Card className="md:col-span-4">
-              <CardHeader>
-                <CardTitle>Общая воронка продаж</CardTitle>
-                <CardDescription>Конверсия из лида в одобренную заявку</CardDescription>
-              </CardHeader>
-              <CardContent className="pl-2">
-                <div className="h-[300px] w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={funnelData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                      <XAxis type="number" />
-                      <YAxis dataKey="name" type="category" width={150} />
-                      <Tooltip 
-                        contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-                        cursor={{ fill: 'transparent' }}
-                      />
-                      <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={40}>
-                        {funnelData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.fill} />
-                        ))}
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="md:col-span-3">
-              <CardHeader>
-                <CardTitle>Эффективность каналов</CardTitle>
-                <CardDescription>Сравнение качества лидов (Approval Rate)</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {channelData.slice(0, 4).map((channel, i) => (
-                    <div key={i} className="flex items-center">
-                      <div className="w-[120px] text-sm font-medium">{channel.name}</div>
-                      <div className="flex-1 mx-2 h-2 bg-muted rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-primary rounded-full" 
-                          style={{ width: `${(channel.rate / 15) * 100}%` }}
-                        />
-                      </div>
-                      <div className="w-[50px] text-sm text-right font-bold">{channel.rate}%</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 p-4 bg-muted/50 rounded-lg text-sm text-muted-foreground">
-                  <strong>Инсайт:</strong> Органический трафик и WABA (WhatsApp) показывают наивысшую конверсию в одобрение (&gt;11%), в то время как платные каналы требуют дальнейшей оптимизации скоринга.
-                </div>
-              </CardContent>
-            </Card>
+          <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-2 bg-primary/10 rounded-full">
+                <Lightbulb className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">Главный итог месяца</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  В декабре мы научились привлекать клиентов в 9 раз дешевле, чем раньше, и нашли самый эффективный способ взаимодействия с ними через интерактивные квизы. Это позволит значительно масштабировать привлечение клиентов при том же бюджете в следующем квартале.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -219,50 +151,61 @@ export default function Home() {
               <Facebook className="h-6 w-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold tracking-tight">Meta Ads: Стратегия снижения CPL</h2>
-              <p className="text-muted-foreground">Facebook & Instagram</p>
+              <h2 className="text-2xl font-bold tracking-tight">Meta Ads (Facebook & Instagram)</h2>
+              <p className="text-muted-foreground">Стратегия двух этапов: Охват + Лидогенерация</p>
             </div>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Динамика стоимости лида (CPL)</CardTitle>
-                <CardDescription>Сравнение с историческими данными</CardDescription>
+                <CardTitle>Снижение стоимости лида (CPL)</CardTitle>
+                <CardDescription>Сравнение средней стоимости заявки с историческими данными</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="h-[250px] w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={metaAdsComparison}>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                      <XAxis dataKey="name" />
-                      <YAxis tickFormatter={(value) => `$${value}`} />
-                      <Tooltip />
-                      <Bar dataKey="cpl" fill="var(--chart-4)" radius={[4, 4, 0, 0]} name="Стоимость лида ($)" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
+              <CardContent className="h-[300px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={metaAdsComparison} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+                    <XAxis type="number" tickFormatter={(value) => `$${value}`} />
+                    <YAxis dataKey="name" type="category" width={120} />
+                    <Tooltip formatter={(value) => [`$${value}`, 'Стоимость лида']} cursor={{fill: 'transparent'}} />
+                    <Bar dataKey="cpl" fill="var(--primary)" radius={[0, 4, 4, 0]} barSize={40}>
+                      {
+                        metaAdsComparison.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={index === 1 ? 'var(--primary)' : '#94a3b8'} />
+                        ))
+                      }
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
               </CardContent>
             </Card>
 
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Реализованная стратегия</h3>
-              <ul className="space-y-3">
-                <li className="flex gap-3">
-                  <div className="mt-1 bg-primary/10 p-1 rounded text-primary h-fit">1</div>
-                  <p className="text-sm text-muted-foreground"><strong>Охватная кампания:</strong> Сначала запустили широкую рекламу для знакомства аудитории с брендом и продуктом.</p>
-                </li>
-                <li className="flex gap-3">
-                  <div className="mt-1 bg-primary/10 p-1 rounded text-primary h-fit">2</div>
-                  <p className="text-sm text-muted-foreground"><strong>Скоринг ИП:</strong> Собрали базу заинтересованных предпринимателей и провели предварительную оценку.</p>
-                </li>
-                <li className="flex gap-3">
-                  <div className="mt-1 bg-primary/10 p-1 rounded text-primary h-fit">3</div>
-                  <p className="text-sm text-muted-foreground"><strong>Лидогенерация + Квиз:</strong> Запустили конверсионную кампанию на "теплую" аудиторию с использованием квиза для упрощения подачи заявки.</p>
-                </li>
-              </ul>
-              <div className="p-4 border rounded-lg bg-green-50 border-green-100 text-green-800 text-sm">
-                <strong>Результат:</strong> Удалось снизить стоимость привлечения клиента с ~$7.92 до <strong>$0.87</strong> (в 9 раз эффективнее).
+            <div className="space-y-6">
+              <div className="grid gap-4 grid-cols-2">
+                <div className="p-4 border rounded-lg bg-muted/30">
+                  <div className="text-sm text-muted-foreground mb-1">Охват кампании</div>
+                  <div className="text-2xl font-bold">493 270</div>
+                  <div className="text-xs text-muted-foreground">Уникальных пользователей</div>
+                </div>
+                <div className="p-4 border rounded-lg bg-muted/30">
+                  <div className="text-sm text-muted-foreground mb-1">Показы</div>
+                  <div className="text-2xl font-bold">2.2M</div>
+                  <div className="text-xs text-muted-foreground">Всего просмотров</div>
+                </div>
+                <div className="p-4 border rounded-lg bg-muted/30">
+                  <div className="text-sm text-muted-foreground mb-1">Запомнили рекламу</div>
+                  <div className="text-2xl font-bold">18 330</div>
+                  <div className="text-xs text-muted-foreground">Ad Recall Lift</div>
+                </div>
+                <div className="p-4 border rounded-lg bg-green-50 border-green-100">
+                  <div className="text-sm text-green-700 mb-1">Экономия бюджета</div>
+                  <div className="text-2xl font-bold text-green-700">-89%</div>
+                  <div className="text-xs text-green-600">Снижение затрат на лид</div>
+                </div>
+              </div>
+              <div className="p-4 bg-muted rounded-lg text-sm">
+                <p><strong>Простыми словами:</strong> Раньше мы тратили почти $8, чтобы получить одного потенциального клиента из Facebook/Instagram. Сейчас мы тратим меньше $1. Это прямое следствие новой стратегии "прогрева" аудитории и использования квиз-формы.</p>
               </div>
             </div>
           </div>
@@ -273,131 +216,96 @@ export default function Home() {
         {/* Google Ads Section */}
         <section id="google" className="space-y-8">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-red-100 rounded-lg text-red-700">
+            <div className="p-2 bg-orange-100 rounded-lg text-orange-700">
               <Globe className="h-6 w-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold tracking-tight">Google Ads: A/B Тестирование</h2>
-              <p className="text-muted-foreground">Поиск и контекстно-медийная сеть</p>
+              <h2 className="text-2xl font-bold tracking-tight">Google Ads (A/B Тестирование)</h2>
+              <p className="text-muted-foreground">Сравнение эффективности: Квиз против Обычной формы</p>
             </div>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
             <Card className="md:col-span-2">
               <CardHeader>
-                <CardTitle>Сравнение форматов: Квиз vs Сайт</CardTitle>
-                <CardDescription>Результаты эксперимента</CardDescription>
+                <CardTitle>Результаты эксперимента</CardTitle>
+                <CardDescription>Квиз показал значительно лучшие результаты по всем метрикам</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-[300px] w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={googleAdsTest} layout="vertical" margin={{ left: 20 }}>
-                      <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                      <XAxis type="number" />
-                      <YAxis dataKey="name" type="category" width={100} />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="conversion" name="Конверсия (%)" fill="var(--chart-2)" radius={[0, 4, 4, 0]} />
-                      <Bar dataKey="cpl" name="Стоимость лида ($)" fill="var(--chart-5)" radius={[0, 4, 4, 0]} />
-                    </BarChart>
-                  </ResponsiveContainer>
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <h4 className="font-semibold flex items-center gap-2 text-green-700">
+                      <CheckCircle2 className="h-5 w-5" /> Квиз-форма (Победитель)
+                    </h4>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Конверсия в заявку</span>
+                        <span className="font-bold">7.03%</span>
+                      </div>
+                      <div className="h-2 bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-green-600 w-[70%]"></div>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Стоимость заявки</span>
+                        <span className="font-bold">$3.37</span>
+                      </div>
+                      <div className="h-2 bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-green-600 w-[33%]"></div>
+                      </div>
+                    </div>
+                    <div className="pt-2 text-sm text-muted-foreground">
+                      706 конверсий при бюджете $2,377
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 opacity-70">
+                    <h4 className="font-semibold flex items-center gap-2 text-muted-foreground">
+                      Обычная форма
+                    </h4>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Конверсия в заявку</span>
+                        <span className="font-bold">1.71%</span>
+                      </div>
+                      <div className="h-2 bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-slate-400 w-[17%]"></div>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Стоимость заявки</span>
+                        <span className="font-bold">$6.82</span>
+                      </div>
+                      <div className="h-2 bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-slate-400 w-[68%]"></div>
+                      </div>
+                    </div>
+                    <div className="pt-2 text-sm text-muted-foreground">
+                      29 конверсий при бюджете $197
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            <div className="flex flex-col justify-center space-y-6">
-              <div className="text-center p-6 border rounded-xl bg-card shadow-sm">
-                <div className="text-4xl font-bold text-primary mb-2">706</div>
-                <div className="text-sm font-medium text-muted-foreground">Конверсий через Квиз</div>
-              </div>
-              <div className="text-center p-6 border rounded-xl bg-card shadow-sm opacity-60">
-                <div className="text-4xl font-bold text-muted-foreground mb-2">29</div>
-                <div className="text-sm font-medium text-muted-foreground">Конверсий через Форму</div>
-              </div>
-              <p className="text-sm text-muted-foreground text-center italic">
-                "Квиз сокращает путь пользователя и снимает психологический барьер перед сложной формой заявки."
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <Separator />
-
-        {/* Push Notification Section */}
-        <section id="push" className="space-y-8">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-yellow-100 rounded-lg text-yellow-700">
-              <Smartphone className="h-6 w-6" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight">Push-уведомления (OnlineBank)</h2>
-              <p className="text-muted-foreground">Эксперимент с мобильным приложением для бизнеса</p>
-            </div>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            <Card className="overflow-hidden">
-              <div className="flex flex-col md:flex-row h-full">
-                <div className="w-full md:w-1/3 bg-muted/30 flex items-center justify-center p-6">
-                  <img 
-                    src="/images/push_notification.png" 
-                    alt="Push Notification Preview" 
-                    className="max-w-full h-auto rounded-lg shadow-md"
-                  />
+            <Card className="bg-primary/5 border-primary/20">
+              <CardHeader>
+                <CardTitle className="text-primary">Вывод</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-sm leading-relaxed">
+                  Квиз не только в <strong>2 раза дешевле</strong> по стоимости привлечения клиента, но и в <strong>4 раза эффективнее</strong> превращает посетителей сайта в реальные заявки.
+                </p>
+                <p className="text-sm leading-relaxed">
+                  Люди охотнее взаимодействуют с интерактивным форматом, отвечая на простые вопросы, чем заполняют скучные формы.
+                </p>
+                <div className="pt-4">
+                  <Badge variant="outline" className="bg-background text-primary border-primary">Рекомендация: Полный переход на Квиз</Badge>
                 </div>
-                <div className="w-full md:w-2/3 p-6 flex flex-col justify-center space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-lg">Кампания "Авто для бизнеса"</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Запуск: 1 декабря 2025<br/>
-                      Таргетинг: Пользователи приложения OnlineBank
-                    </p>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm border-b pb-2">
-                      <span>Привлечено лидов</span>
-                      <span className="font-bold">132</span>
-                    </div>
-                    <div className="flex justify-between text-sm border-b pb-2">
-                      <span>Одобрено (Авто)</span>
-                      <span className="font-bold">1</span>
-                    </div>
-                    <div className="flex justify-between text-sm pb-2">
-                      <span>Статус</span>
-                      <Badge variant="outline" className="text-yellow-600 border-yellow-600">Ожидаем данные от банка</Badge>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </CardContent>
             </Card>
-
-            <div className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Инсайт</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Мы запустили таргетированную рассылку через приложение OnlineBank с предложением лизинга авто под 16.5%. 
-                    На данный момент мы видим <strong>132 перехода</strong>, которые конвертировались в заявки. 
-                    Однако, полная статистика по охватам и кликам находится на стороне банка. Мы направили официальный запрос и ожидаем детальную выгрузку для расчета CTR и стоимости контакта.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="bg-primary/5 border-primary/20">
-                <CardHeader>
-                  <CardTitle className="text-base text-primary">Методика M3 (Ручной скоринг)</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Методика M3 применяется ко всем каналам трафика для "спасения" сложных заявок, отклоненных автоматическим скорингом.
-                    <br/><br/>
-                    В декабре ручной анализ позволил одобрить дополнительно <strong>16 уникальных компаний</strong> (преимущественно из органического трафика), что увеличило общий объем продаж на 9.5%.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
           </div>
         </section>
 
@@ -410,61 +318,118 @@ export default function Home() {
               <MessageSquare className="h-6 w-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold tracking-tight">WABA: Реактивация базы</h2>
-              <p className="text-muted-foreground">WhatsApp Business API рассылка</p>
+              <h2 className="text-2xl font-bold tracking-tight">WABA (WhatsApp Business API)</h2>
+              <p className="text-muted-foreground">Кампания по реактивации "спящих" клиентов</p>
             </div>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="space-y-6">
-              <p className="text-muted-foreground">
-                Мы использовали базу "спящих" ИП (ранее отказано или не завершили заявку) для повторной активации. 
-                Это позволило получить лиды практически бесплатно, так как контакт уже был в базе.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-card border rounded-lg">
-                  <div className="text-2xl font-bold">99%</div>
-                  <div className="text-xs text-muted-foreground">Доставляемость</div>
-                </div>
-                <div className="p-4 bg-card border rounded-lg">
-                  <div className="text-2xl font-bold">83%</div>
-                  <div className="text-xs text-muted-foreground">Прочитано (Open Rate)</div>
-                </div>
-                <div className="p-4 bg-card border rounded-lg">
-                  <div className="text-2xl font-bold">16%</div>
-                  <div className="text-xs text-muted-foreground">CTR (Клики)</div>
-                </div>
-                <div className="p-4 bg-card border rounded-lg">
-                  <div className="text-2xl font-bold">$0.37</div>
-                  <div className="text-xs text-muted-foreground">Стоимость клика</div>
-                </div>
-              </div>
-            </div>
-
             <Card>
               <CardHeader>
                 <CardTitle>Воронка рассылки</CardTitle>
+                <CardDescription>Конверсия от отправки сообщения до одобренной заявки</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="h-[250px] w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={wabaFunnel} layout="vertical">
-                      <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                      <XAxis type="number" hide />
-                      <YAxis dataKey="name" type="category" width={100} />
-                      <Tooltip />
-                      <Bar dataKey="value" fill="var(--chart-3)" radius={[0, 4, 4, 0]} barSize={30}>
-                        {wabaFunnel.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fillOpacity={1 - (index * 0.15)} />
-                        ))}
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
+              <CardContent className="h-[300px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={wabaFunnel} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+                    <XAxis type="number" hide />
+                    <YAxis dataKey="name" type="category" width={80} />
+                    <Tooltip cursor={{fill: 'transparent'}} />
+                    <Bar dataKey="value" fill="var(--primary)" radius={[0, 4, 4, 0]} barSize={30} label={{ position: 'right', fill: 'var(--foreground)', fontSize: 12 }}>
+                      {
+                        wabaFunnel.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={`oklch(0.48 0.14 145 / ${1 - index * 0.15})`} />
+                        ))
+                      }
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
               </CardContent>
             </Card>
+
+            <div className="space-y-6">
+              <div className="grid gap-4 grid-cols-2">
+                <div className="p-4 border rounded-lg">
+                  <div className="text-sm text-muted-foreground mb-1">Потрачено</div>
+                  <div className="text-2xl font-bold">$66</div>
+                </div>
+                <div className="p-4 border rounded-lg">
+                  <div className="text-sm text-muted-foreground mb-1">Получено заявок</div>
+                  <div className="text-2xl font-bold">73</div>
+                </div>
+                <div className="p-4 border rounded-lg bg-green-50 border-green-100 col-span-2">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <div className="text-sm text-green-700 mb-1">Одобрено заявок</div>
+                      <div className="text-2xl font-bold text-green-700">8</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm text-green-700 mb-1">Конверсия в одобрение</div>
+                      <div className="text-xl font-bold text-green-700">11%</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 bg-muted rounded-lg text-sm">
+                <p>Мы отправили персонализированные сообщения клиентам, которые ранее оставляли заявку, но не получили одобрения. После внедрения нового скоринга для ИП мы решили дать им второй шанс. <strong>Результат: 8 новых клиентов всего за $66.</strong></p>
+              </div>
+            </div>
           </div>
+        </section>
+
+        <Separator />
+
+        {/* All Channels Comparison */}
+        <section id="channels" className="space-y-8">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-purple-100 rounded-lg text-purple-700">
+              <LayoutDashboard className="h-6 w-6" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight">Сравнение каналов</h2>
+              <p className="text-muted-foreground">Эффективность источников трафика</p>
+            </div>
+          </div>
+
+          <Card>
+            <CardContent className="p-0">
+              <div className="relative w-full overflow-auto">
+                <table className="w-full caption-bottom text-sm">
+                  <thead className="[&_tr]:border-b">
+                    <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                      <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Канал</th>
+                      <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Привлечено лидов</th>
+                      <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Одобрено заявок</th>
+                      <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">% Одобрения</th>
+                      <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Комментарий</th>
+                    </tr>
+                  </thead>
+                  <tbody className="[&_tr:last-child]:border-0">
+                    {channelData.map((channel) => (
+                      <tr key={channel.name} className="border-b transition-colors hover:bg-muted/50">
+                        <td className="p-4 align-middle font-medium">{channel.name}</td>
+                        <td className="p-4 align-middle text-right">{channel.leads}</td>
+                        <td className="p-4 align-middle text-right">{channel.approved}</td>
+                        <td className="p-4 align-middle text-right">
+                          <Badge variant={channel.rate > 10 ? "default" : "secondary"} className={channel.rate > 10 ? "bg-green-600 hover:bg-green-700" : ""}>
+                            {channel.rate}%
+                          </Badge>
+                        </td>
+                        <td className="p-4 align-middle text-muted-foreground">
+                          {channel.name === 'Organic' && 'Самое высокое качество лидов'}
+                          {channel.name === 'WABA' && 'Реактивация базы работает отлично'}
+                          {channel.name === 'Kolesa.kz' && 'Стабильный источник объема'}
+                          {channel.name === 'Google Ads' && 'Квиз повышает качество'}
+                          {channel.name === 'Meta Ads' && 'Заявки еще на скоринге (запуск в конце месяца)'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
         </section>
 
         <Separator />
@@ -481,124 +446,47 @@ export default function Home() {
             </div>
           </div>
 
-          <Tabs defaultValue="static" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 max-w-[400px]">
-              <TabsTrigger value="static">Баннеры</TabsTrigger>
-              <TabsTrigger value="preview">Предпросмотр в ленте</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="static" className="mt-6">
-              <div className="grid gap-6 md:grid-cols-3">
-                <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md">
-                  <div className="aspect-[4/5] overflow-hidden">
-                    <img 
-                      src="/images/IP_var1.jpg" 
-                      alt="Creative 1" 
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold">Вариант 1: Цифровой лизинг</h3>
-                    <p className="text-sm text-muted-foreground mt-1">Акцент на скорости — "за 10 минут"</p>
-                  </div>
-                </div>
-                
-                <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md">
-                  <div className="aspect-[4/5] overflow-hidden">
-                    <img 
-                      src="/images/IP_var1-2.jpg" 
-                      alt="Creative 2" 
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold">Вариант 2: Не выходя из дома</h3>
-                    <p className="text-sm text-muted-foreground mt-1">Акцент на удобстве и гибких условиях</p>
-                  </div>
-                </div>
-
-                <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md">
-                  <div className="aspect-[4/5] overflow-hidden">
-                    <img 
-                      src="/images/IP_var1-1.jpg" 
-                      alt="Creative 3" 
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold">Вариант 3: Без бумаг</h3>
-                    <p className="text-sm text-muted-foreground mt-1">Акцент на простоте оформления</p>
-                  </div>
-                </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md">
+              <div className="aspect-[4/5] overflow-hidden">
+                <img 
+                  src="/images/IP_var1.jpg" 
+                  alt="Creative 1" 
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
-            </TabsContent>
-            
-            <TabsContent value="preview" className="mt-6">
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="rounded-lg border bg-background shadow-sm overflow-hidden">
-                  <img src="/images/ad_preview_1.png" alt="Ad Preview 1" className="w-full h-auto" />
-                  <div className="p-3 bg-muted/20 text-xs text-muted-foreground text-center">
-                    Отображение в ленте Facebook и Instagram Stories
-                  </div>
-                </div>
-                <div className="rounded-lg border bg-background shadow-sm overflow-hidden">
-                  <img src="/images/ad_preview_2.png" alt="Ad Preview 2" className="w-full h-auto" />
-                  <div className="p-3 bg-muted/20 text-xs text-muted-foreground text-center">
-                    Адаптация под Reels и мобильную ленту
-                  </div>
-                </div>
-                <div className="rounded-lg border bg-background shadow-sm overflow-hidden">
-                  <img src="/images/ad_preview_3.png" alt="Ad Preview 3" className="w-full h-auto" />
-                  <div className="p-3 bg-muted/20 text-xs text-muted-foreground text-center">
-                    Варианты заголовков и призывов к действию
-                  </div>
-                </div>
-                <div className="rounded-lg border bg-background shadow-sm overflow-hidden">
-                  <img src="/images/ad_preview_4.png" alt="Ad Preview 4" className="w-full h-auto" />
-                  <div className="p-3 bg-muted/20 text-xs text-muted-foreground text-center">
-                    Тестирование различных форматов (карусель, одно изображение)
-                  </div>
-                </div>
+              <div className="p-4">
+                <h3 className="font-semibold">Вариант 1: Цифровой лизинг</h3>
+                <p className="text-sm text-muted-foreground mt-1">Акцент на скорости — "за 10 минут"</p>
               </div>
-            </TabsContent>
-          </Tabs>
-        </section>
+            </div>
+            
+            <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md">
+              <div className="aspect-[4/5] overflow-hidden">
+                <img 
+                  src="/images/IP_var1-2.jpg" 
+                  alt="Creative 2" 
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="font-semibold">Вариант 2: Не выходя из дома</h3>
+                <p className="text-sm text-muted-foreground mt-1">Акцент на удобстве и гибких условиях</p>
+              </div>
+            </div>
 
-        <Separator />
-
-        {/* Detailed Stats Table */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold tracking-tight">Детальная статистика по каналам</h2>
-          <div className="rounded-md border">
-            <div className="relative w-full overflow-auto">
-              <table className="w-full caption-bottom text-sm">
-                <thead className="[&_tr]:border-b">
-                  <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Источник</th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Лиды</th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Одобрено</th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Approval Rate</th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Комментарий</th>
-                  </tr>
-                </thead>
-                <tbody className="[&_tr:last-child]:border-0">
-                  {channelData.map((channel, i) => (
-                    <tr key={i} className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                      <td className="p-4 align-middle font-medium">{channel.name}</td>
-                      <td className="p-4 align-middle">{channel.leads}</td>
-                      <td className="p-4 align-middle">{channel.approved}</td>
-                      <td className="p-4 align-middle">
-                        <Badge variant={channel.rate > 5 ? "default" : "secondary"}>
-                          {channel.rate}%
-                        </Badge>
-                      </td>
-                      <td className="p-4 align-middle text-muted-foreground">
-                        {channel.comment}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md">
+              <div className="aspect-[4/5] overflow-hidden">
+                <img 
+                  src="/images/IP_var1-1.jpg" 
+                  alt="Creative 3" 
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="font-semibold">Вариант 3: Без бумаг</h3>
+                <p className="text-sm text-muted-foreground mt-1">Акцент на простоте оформления</p>
+              </div>
             </div>
           </div>
         </section>
@@ -606,82 +494,118 @@ export default function Home() {
         <Separator />
 
         {/* Roadmap */}
-        <section id="roadmap" className="space-y-8 pb-12">
+        <section id="roadmap" className="space-y-8 pb-10">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-purple-100 rounded-lg text-purple-700">
-              <Lightbulb className="h-6 w-6" />
+            <div className="p-2 bg-yellow-100 rounded-lg text-yellow-700">
+              <Target className="h-6 w-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold tracking-tight">Планы на Q1 2026</h2>
-              <p className="text-muted-foreground">Стратегия масштабирования</p>
+              <h2 className="text-2xl font-bold tracking-tight">Рекомендации и планы</h2>
+              <p className="text-muted-foreground">Дорожная карта на Q1 2026</p>
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            <Card>
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card className="border-l-4 border-l-primary">
               <CardHeader>
-                <CardTitle className="text-lg">Масштабирование</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">1</span>
+                  Масштабирование квизов
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <ul className="list-disc pl-4 space-y-2 text-sm text-muted-foreground">
-                  <li>Увеличение бюджета на Meta Ads (так как CPL низкий)</li>
-                  <li>Расширение семантики в Google Ads</li>
-                  <li>Запуск TikTok Ads для охвата молодой аудитории ИП</li>
-                </ul>
+                <p className="text-sm text-muted-foreground">
+                  Внедрить квиз-форму на всех каналах. Проанализировать результаты A/B теста креативов в Meta. Ожидаемый результат: снижение CPL в Google и Meta, повышение общей конверсии.
+                </p>
               </CardContent>
             </Card>
-            
-            <Card>
+
+            <Card className="border-l-4 border-l-primary">
               <CardHeader>
-                <CardTitle className="text-lg">Оптимизация</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">2</span>
+                  Развитие WABA-маркетинга
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <ul className="list-disc pl-4 space-y-2 text-sm text-muted-foreground">
-                  <li>Доработка скоринговой модели для повышения Approval Rate</li>
-                  <li>A/B тесты новых квизов для разных сегментов (Такси, Грузоперевозки)</li>
-                  <li>Автоматизация WABA рассылок по триггерам</li>
-                </ul>
+                <p className="text-sm text-muted-foreground">
+                  Запустить ежемесячные автоматизированные рассылки по разным сегментам базы: специальные предложения для отказников, напоминания о документах и т.д.
+                </p>
               </CardContent>
             </Card>
-            
-            <Card>
+
+            <Card className="border-l-4 border-l-primary">
               <CardHeader>
-                <CardTitle className="text-lg">Аналитика</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">3</span>
+                  Оптимизация Meta Ads
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <ul className="list-disc pl-4 space-y-2 text-sm text-muted-foreground">
-                  <li>Внедрение сквозной аналитики до сделки (ROI)</li>
-                  <li>Дашборд в реальном времени для руководства</li>
-                  <li>Анализ LTV (пожизненной ценности) клиента</li>
-                </ul>
+                <p className="text-sm text-muted-foreground">
+                  Продолжать использовать связку "узнаваемость + лидогенерация", направив трафик с лид-кампаний на новый квиз для еще большего снижения стоимости заявки.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-l-4 border-l-primary">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">4</span>
+                  Email-маркетинг
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Подготовить и запустить первую автоматизированную email-рассылку. Проанализировать эффективность всех каналов за квартал и скорректировать стратегию.
+                </p>
               </CardContent>
             </Card>
           </div>
         </section>
 
         {/* Glossary */}
-        <section className="bg-muted/30 p-6 rounded-xl">
-          <div className="flex items-center gap-2 mb-4">
+        <section id="glossary" className="bg-muted/30 rounded-xl p-8 space-y-6">
+          <div className="flex items-center gap-3">
             <BookOpen className="h-5 w-5 text-muted-foreground" />
-            <h3 className="font-semibold">Словарь терминов</h3>
+            <h3 className="text-xl font-semibold">Словарь терминов</h3>
           </div>
-          <div className="grid gap-4 md:grid-cols-2 text-sm text-muted-foreground">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 text-sm">
             <div>
-              <strong className="text-foreground">CPL (Cost Per Lead):</strong> Стоимость привлечения одной заявки. Чем ниже, тем лучше.
+              <strong className="block text-foreground mb-1">Лид (Lead)</strong>
+              <span className="text-muted-foreground">Потенциальный клиент, который оставил свои контактные данные и проявил интерес к услуге.</span>
             </div>
             <div>
-              <strong className="text-foreground">CTR (Click-Through Rate):</strong> Кликабельность объявления. Показывает интерес аудитории к креативу.
+              <strong className="block text-foreground mb-1">CPL (Cost Per Lead)</strong>
+              <span className="text-muted-foreground">Стоимость привлечения одного лида. Затраты на рекламу / количество лидов.</span>
             </div>
             <div>
-              <strong className="text-foreground">Conversion Rate:</strong> Процент пользователей, совершивших целевое действие (оставивших заявку).
+              <strong className="block text-foreground mb-1">CR (Conversion Rate)</strong>
+              <span className="text-muted-foreground">Коэффициент конверсии — процент посетителей, совершивших целевое действие.</span>
             </div>
             <div>
-              <strong className="text-foreground">Approval Rate:</strong> Процент одобренных заявок от общего числа лидов. Показатель качества трафика.
+              <strong className="block text-foreground mb-1">CTR (Click-Through Rate)</strong>
+              <span className="text-muted-foreground">Показатель кликабельности — процент людей, кликнувших на рекламу после просмотра.</span>
+            </div>
+            <div>
+              <strong className="block text-foreground mb-1">WABA</strong>
+              <span className="text-muted-foreground">WhatsApp Business API — инструмент для массовых рассылок и общения с клиентами.</span>
+            </div>
+            <div>
+              <strong className="block text-foreground mb-1">Скоринг</strong>
+              <span className="text-muted-foreground">Автоматическая оценка кредитоспособности клиента для принятия решения.</span>
             </div>
           </div>
         </section>
 
       </main>
+
+      <footer className="border-t py-8 bg-muted/20">
+        <div className="container text-center text-sm text-muted-foreground">
+          <p>Halyk Leasing | Отчет по лидогенерации | Декабрь 2025</p>
+          <p className="mt-1">Подготовлено отделом маркетинга</p>
+        </div>
+      </footer>
     </div>
   );
 }
