@@ -37,7 +37,7 @@ const googleAdsTest = [
 ];
 
 const channelData = [
-  { name: 'Organic', leads: 853, approved: 109, rate: 12.8, comment: 'Самое высокое качество лидов' },
+  { name: 'Organic + Direct', leads: 853, approved: 125, rate: 14.6, comment: 'Включает 16 заявок, одобренных вручную (M3)' },
   { name: 'Push (OnlineBank)', leads: 132, approved: 1, rate: 0.8, comment: 'Новый канал, ожидаем статистику от банка' },
   { name: 'WABA', leads: 73, approved: 8, rate: 11.0, comment: 'Реактивация базы работает отлично' },
   { name: 'Kolesa.kz', leads: 817, approved: 16, rate: 2.0, comment: 'Стабильный источник объема' },
@@ -117,6 +117,9 @@ export default function Home() {
               <CardContent>
                 <div className="text-3xl font-bold">169</div>
                 <p className="text-xs text-muted-foreground mt-1">153 Авто + 16 Ручной скоринг (M3)</p>
+                <div className="mt-2 text-[10px] bg-yellow-50 text-yellow-800 px-2 py-1 rounded border border-yellow-100">
+                  M3 повысил одобрение на 9.5%
+                </div>
               </CardContent>
             </Card>
             
@@ -384,13 +387,13 @@ export default function Home() {
               
               <Card className="bg-primary/5 border-primary/20">
                 <CardHeader>
-                  <CardTitle className="text-base text-primary">Ручной скоринг (Методика M3)</CardTitle>
+                  <CardTitle className="text-base text-primary">Методика M3 (Ручной скоринг)</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Помимо автоматического скоринга, мы применяем методику M3 для ручного рассмотрения сложных заявок. 
-                    В декабре это принесло дополнительно <strong>16 одобренных клиентов</strong> (уникальных компаний), которые могли быть отсеяны автоматикой. 
-                    Это доказывает важность гибридного подхода к оценке рисков.
+                    Методика M3 применяется ко всем каналам трафика для "спасения" сложных заявок, отклоненных автоматическим скорингом.
+                    <br/><br/>
+                    В декабре ручной анализ позволил одобрить дополнительно <strong>16 уникальных компаний</strong> (преимущественно из органического трафика), что увеличило общий объем продаж на 9.5%.
                   </p>
                 </CardContent>
               </Card>
