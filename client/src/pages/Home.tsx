@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Link } from "wouter";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -65,7 +66,7 @@ export default function Home() {
             <a href="#history" className="hover:text-foreground transition-colors">Динамика</a>
             <a href="#channels" className="hover:text-foreground transition-colors">Каналы</a>
             <a href="#meta" className="hover:text-foreground transition-colors">Meta Ads</a>
-            <a href="#roadmap" className="hover:text-foreground transition-colors">Планы</a>
+            <Link href="/roadmap" className="hover:text-foreground transition-colors">Планы</Link>
           </nav>
           <div className="text-sm text-muted-foreground">
             Декабрь 2025
