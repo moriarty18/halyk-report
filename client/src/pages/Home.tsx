@@ -35,11 +35,11 @@ const channelData = [
   { name: 'OnlineBank', leads: 70, signed: 38, approved: 1, rate: 1.4, comment: 'Требует оптимизации' },
 ];
 
-// Placeholder for Historical Data (MoM)
+// Historical Data (MoM) from Excel
 const historicalData = [
-  { name: 'Октябрь', leads: 1850, approved: 110 },
-  { name: 'Ноябрь', leads: 2100, approved: 135 },
-  { name: 'Декабрь', leads: 2575, approved: 169 },
+  { name: 'Октябрь', leads: 1944, label: '1944' },
+  { name: 'Ноябрь', leads: 673, label: '673 (1-14 нояб.)' },
+  { name: 'Декабрь', leads: 2575, label: '2575' },
 ];
 
 const wabaFunnel = [
@@ -178,7 +178,6 @@ export default function Home() {
                   <Tooltip />
                   <Legend />
                   <Line yAxisId="left" type="monotone" dataKey="leads" name="Лиды" stroke="var(--primary)" strokeWidth={2} activeDot={{ r: 8 }} />
-                  <Line yAxisId="right" type="monotone" dataKey="approved" name="Одобрено" stroke="#16a34a" strokeWidth={2} />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
@@ -602,12 +601,12 @@ export default function Home() {
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
                   <Globe className="h-4 w-4" />
-                  Экосистема
+                  Экосистема & Партнеры
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Интеграция маркетплейса лизинга непосредственно в приложение <strong>OnlineBank</strong> для бесшовного пользовательского опыта.
+                  Интеграция маркетплейса в <strong>OnlineBank</strong>. Расширение партнерства с <strong>Allur</strong> и <strong>Kolesa.kz</strong>. Запуск мобильного приложения для физлиц.
                 </p>
               </CardContent>
             </Card>
