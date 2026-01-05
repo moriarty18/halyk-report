@@ -152,61 +152,7 @@ export default function Roadmap() {
           </div>
         </section>
 
-        <Separator />
 
-        {/* Mid-term: Q1 2026 */}
-        <section className="space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-indigo-100 rounded-lg text-indigo-700">
-              <Rocket className="h-6 w-6" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight">Q1 2026: Среднесрочные планы</h2>
-              <p className="text-muted-foreground">Развитие экосистемы и продуктовая интеграция</p>
-            </div>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <Globe className="h-8 w-8 text-indigo-600 mb-2" />
-                <CardTitle className="text-lg">Интеграция в OnlineBank</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Внедрение маркетплейса лизинга непосредственно в интерфейс приложения OnlineBank для бесшовного оформления заявок текущими клиентами банка.
-                </p>
-                <Badge variant="outline">Экосистема</Badge>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Smartphone className="h-8 w-8 text-indigo-600 mb-2" />
-                <CardTitle className="text-lg">Мобильное приложение</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Запуск MVP мобильного приложения для физических лиц. Функционал: каталог авто, калькулятор, подача заявки, трекинг статуса.
-                </p>
-                <Badge variant="outline">Продукт</Badge>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Zap className="h-8 w-8 text-indigo-600 mb-2" />
-                <CardTitle className="text-lg">Партнерские интеграции</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Техническая интеграция с платформами <strong>Kolesa.kz</strong> и <strong>Allur</strong> для автоматического получения лидов и обмена статусами.
-                </p>
-                <Badge variant="outline">Партнеры</Badge>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
 
         <div className="bg-slate-50 rounded-xl p-8 text-center space-y-4">
           <h3 className="text-xl font-bold">Готовы обсудить детали?</h3>
