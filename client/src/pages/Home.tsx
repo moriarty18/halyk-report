@@ -69,10 +69,10 @@ export default function Home() {
             <span className="font-bold text-lg tracking-tight">Halyk Leasing</span>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <a href="#summary" className="hover:text-foreground transition-colors">Итоги</a>
-            <a href="#history" className="hover:text-foreground transition-colors">Динамика</a>
-            <a href="#channels" className="hover:text-foreground transition-colors">Каналы</a>
-            <a href="#meta" className="hover:text-foreground transition-colors">Meta Ads</a>
+            <a href="/halyk-report/#summary" className="hover:text-foreground transition-colors">Итоги</a>
+            <a href="/halyk-report/#history" className="hover:text-foreground transition-colors">Динамика</a>
+            <a href="/halyk-report/#channels" className="hover:text-foreground transition-colors">Каналы</a>
+            <a href="/halyk-report/#meta" className="hover:text-foreground transition-colors">Meta Ads</a>
             <a href="/halyk-report/#/analytics" className="hover:text-foreground transition-colors">CRM Analytics</a>
             <a href="/halyk-report/#/roadmap" className="hover:text-foreground transition-colors">Планы</a>
           </nav>
