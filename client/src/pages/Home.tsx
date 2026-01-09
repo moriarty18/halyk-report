@@ -69,12 +69,12 @@ export default function Home() {
             <span className="font-bold text-lg tracking-tight">Halyk Leasing</span>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <a href="/halyk-report/#summary" className="hover:text-foreground transition-colors">Итоги</a>
-            <a href="/halyk-report/#history" className="hover:text-foreground transition-colors">Динамика</a>
-            <a href="/halyk-report/#channels" className="hover:text-foreground transition-colors">Каналы</a>
-            <a href="/halyk-report/#meta" className="hover:text-foreground transition-colors">Meta Ads</a>
-            <a href="/halyk-report/#/analytics" className="hover:text-foreground transition-colors">CRM Analytics</a>
-            <a href="/halyk-report/#/roadmap" className="hover:text-foreground transition-colors">Планы</a>
+            <button onClick={() => document.getElementById('summary')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-foreground transition-colors">Итоги</button>
+            <button onClick={() => document.getElementById('history')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-foreground transition-colors">Динамика</button>
+            <button onClick={() => document.getElementById('channels')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-foreground transition-colors">Каналы</button>
+            <button onClick={() => document.getElementById('meta')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-foreground transition-colors">Meta Ads</button>
+            <Link href="/analytics" className="hover:text-foreground transition-colors">CRM Analytics</Link>
+            <Link href="/roadmap" className="hover:text-foreground transition-colors">Планы</Link>
           </nav>
           <div className="text-sm text-muted-foreground">
             Обновлено: 9 января 2026
@@ -715,9 +715,9 @@ export default function Home() {
           </div>
 
           <div className="flex justify-center">
-            <a href="/halyk-report/#/analytics" className="text-primary hover:underline text-sm font-medium">
+            <Link href="/analytics" className="text-primary hover:underline text-sm font-medium">
               Смотреть детальную CRM аналитику →
-            </a>
+            </Link>
           </div>
         </section>
 
