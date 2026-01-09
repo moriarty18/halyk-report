@@ -15,7 +15,7 @@ export default function Roadmap() {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <a href="#/">
+            <a href="/halyk-report/#/">
               <div className="flex items-center gap-2 cursor-pointer">
                 <div className="h-8 w-8 rounded bg-primary flex items-center justify-center text-primary-foreground font-bold">H</div>
                 <span className="font-bold text-lg tracking-tight">Halyk Leasing</span>
@@ -23,8 +23,8 @@ export default function Roadmap() {
             </a>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <a href="#/" className="hover:text-foreground transition-colors">Отчет</a>
-            <a href="#/analytics" className="hover:text-foreground transition-colors">CRM Analytics</a>
+            <a href="/halyk-report/#/" className="hover:text-foreground transition-colors">Отчет</a>
+            <a href="/halyk-report/#/analytics" className="hover:text-foreground transition-colors">CRM Analytics</a>
             <span className="text-foreground">Планы (Roadmap)</span>
           </nav>
           <div className="text-sm text-muted-foreground">
@@ -160,7 +160,7 @@ export default function Roadmap() {
           <p className="text-muted-foreground">
             Следующая статус-встреча запланирована на 5 января, 10:00.
           </p>
-          <a href="#/">
+          <a href="/halyk-report/#/">
             <div className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 cursor-pointer">
               Вернуться к отчету
             </div>

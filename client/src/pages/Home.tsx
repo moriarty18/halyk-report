@@ -73,8 +73,8 @@ export default function Home() {
             <a href="#history" className="hover:text-foreground transition-colors">Динамика</a>
             <a href="#channels" className="hover:text-foreground transition-colors">Каналы</a>
             <a href="#meta" className="hover:text-foreground transition-colors">Meta Ads</a>
-            <a href="#/analytics" className="hover:text-foreground transition-colors">CRM Analytics</a>
-            <a href="#/roadmap" className="hover:text-foreground transition-colors">Планы</a>
+            <a href="/halyk-report/#/analytics" className="hover:text-foreground transition-colors">CRM Analytics</a>
+            <a href="/halyk-report/#/roadmap" className="hover:text-foreground transition-colors">Планы</a>
           </nav>
           <div className="text-sm text-muted-foreground">
             Обновлено: 9 января 2026
@@ -715,7 +715,7 @@ export default function Home() {
           </div>
 
           <div className="flex justify-center">
-            <a href="#/analytics" className="text-primary hover:underline text-sm font-medium">
+            <a href="/halyk-report/#/analytics" className="text-primary hover:underline text-sm font-medium">
               Смотреть детальную CRM аналитику →
             </a>
           </div>
