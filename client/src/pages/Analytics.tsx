@@ -206,17 +206,17 @@ export default function Analytics() {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <Link href="/">
+            <a href="#/">
               <div className="flex items-center gap-2 cursor-pointer">
                 <div className="h-8 w-8 rounded bg-primary flex items-center justify-center text-primary-foreground font-bold">H</div>
                 <span className="font-bold text-lg tracking-tight">Halyk Leasing</span>
               </div>
-            </Link>
+            </a>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">Отчет</Link>
+            <a href="#/" className="hover:text-foreground transition-colors">Отчет</a>
             <span className="text-foreground">CRM Analytics</span>
-            <Link href="/roadmap" className="hover:text-foreground transition-colors">Планы</Link>
+            <a href="#/roadmap" className="hover:text-foreground transition-colors">Планы</a>
           </nav>
           <div className="text-sm text-muted-foreground">
             Октябрь 2025 — Январь 2026
@@ -678,12 +678,12 @@ export default function Analytics() {
             Данные обновлены на основе выгрузки CRM и рекламных кабинетов Google/Meta (9 января 2026).
           </p>
           <div className="flex gap-4">
-            <Link href="/" className="text-sm text-primary hover:underline flex items-center gap-1">
+            <a href="#/" className="text-sm text-primary hover:underline flex items-center gap-1">
               Вернуться к отчету
-            </Link>
-            <Link href="/roadmap" className="text-sm text-primary hover:underline flex items-center gap-1">
+            </a>
+            <a href="#/roadmap" className="text-sm text-primary hover:underline flex items-center gap-1">
               Планы (Roadmap)
-            </Link>
+            </a>
           </div>
         </div>
       </main>
