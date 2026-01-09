@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
-  Cell, LineChart, Line, Legend
+  Cell, LineChart, Line, Legend, ComposedChart
 } from 'recharts';
 import { 
   Users, CheckCircle2, Target, 
@@ -14,10 +14,10 @@ import {
   FileSignature, CalendarClock, Zap
 } from "lucide-react";
 
-// Data for charts
+// Data for charts - ОБНОВЛЕНО 9 января 2026
 const metaAdsComparison = [
-  { name: 'До оптимизации', cpl: 7.92 },
-  { name: 'Декабрь 2025', cpl: 0.87 },
+  { name: 'До оптимизации', cpl: 6.25 },
+  { name: 'Январь 2026', cpl: 0.48 },
 ];
 
 const abTestData = [
@@ -25,22 +25,22 @@ const abTestData = [
   { name: 'Обычная форма', conversion: 1.71, cpl: 6.82 },
 ];
 
-// Updated Channel Data with Signed stage
+// Updated Channel Data - Декабрь 2025 (обновлено)
 const channelData = [
-  { name: 'Organic + Direct', leads: 853, signed: 467, approved: 125, rate: 14.6, comment: 'Включает 16 заявок, одобренных вручную (M3)' },
-  { name: 'Push (OnlineBank)', leads: 132, signed: 72, approved: 1, rate: 0.8, comment: 'Новый канал, ожидаем статистику от банка' },
-  { name: 'WABA', leads: 73, signed: 40, approved: 8, rate: 11.0, comment: 'Реактивация базы работает отлично' },
-  { name: 'Kolesa.kz', leads: 817, signed: 447, approved: 16, rate: 2.0, comment: 'Стабильный источник объема' },
-  { name: 'Google Ads', leads: 716, signed: 392, approved: 17, rate: 2.4, comment: 'Квиз повышает качество' },
-  { name: 'Meta Ads', leads: 38, signed: 21, approved: 0, rate: 0.0, comment: 'Кампания только началась' },
-  { name: 'OnlineBank', leads: 70, signed: 38, approved: 1, rate: 1.4, comment: 'Требует оптимизации' },
+  { name: 'Organic + Direct', leads: 1132, signed: 392, approved: 137, rate: 35.0, comment: 'Лучший источник по качеству' },
+  { name: 'OnlineBank', leads: 71, signed: 18, approved: 1, rate: 5.6, comment: 'Новый канал' },
+  { name: 'WhatsApp', leads: 73, signed: 37, approved: 8, rate: 21.6, comment: 'Реактивация базы работает отлично' },
+  { name: 'Kolesa.kz', leads: 858, signed: 136, approved: 17, rate: 12.5, comment: 'Стабильный источник объема' },
+  { name: 'Google Ads', leads: 787, signed: 92, approved: 19, rate: 20.7, comment: 'Квиз повышает качество' },
+  { name: 'Meta Ads', leads: 213, signed: 30, approved: 6, rate: 20.0, comment: 'IP promo кампания' },
 ];
 
-// Historical Data (MoM) from Excel
+// Historical Data (MoM) - ОБНОВЛЕНО
 const historicalData = [
-  { name: 'Октябрь', leads: 1944, label: '1944' },
-  { name: 'Ноябрь', leads: 673, label: '673 (1-14 нояб.)' },
-  { name: 'Декабрь', leads: 2575, label: '2575' },
+  { name: 'Октябрь', leads: 2033, consents: 736, approved: 123 },
+  { name: 'Ноябрь', leads: 1841, consents: 633, approved: 184 },
+  { name: 'Декабрь', leads: 3146, consents: 709, approved: 191 },
+  { name: 'Январь*', leads: 1384, consents: 221, approved: 48 },
 ];
 
 const wabaFunnel = [
@@ -52,6 +52,13 @@ const wabaFunnel = [
 ];
 
 export default function Home() {
+  // Расчет итогов для декабря
+  const decemberTotal = {
+    leads: channelData.reduce((sum, ch) => sum + ch.leads, 0),
+    signed: channelData.reduce((sum, ch) => sum + ch.signed, 0),
+    approved: channelData.reduce((sum, ch) => sum + ch.approved, 0),
+  };
+
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       {/* Header */}
@@ -66,11 +73,11 @@ export default function Home() {
             <a href="#history" className="hover:text-foreground transition-colors">Динамика</a>
             <a href="#channels" className="hover:text-foreground transition-colors">Каналы</a>
             <a href="#meta" className="hover:text-foreground transition-colors">Meta Ads</a>
-            <Link href="/analytics" className="hover:text-foreground transition-colors">CRM Analytics</Link>
-            <Link href="/roadmap" className="hover:text-foreground transition-colors">Планы</Link>
+            <Link href="/#/analytics" className="hover:text-foreground transition-colors">CRM Analytics</Link>
+            <Link href="/#/roadmap" className="hover:text-foreground transition-colors">Планы</Link>
           </nav>
           <div className="text-sm text-muted-foreground">
-            Декабрь 2025
+            Обновлено: 9 января 2026
           </div>
         </div>
       </header>
@@ -82,11 +89,11 @@ export default function Home() {
           <div className="space-y-2">
             <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl">Ежемесячный отчет по лидогенерации</h1>
             <p className="text-xl text-muted-foreground">
-              Ключевые показатели эффективности за период 1–26 декабря 2025
+              Ключевые показатели эффективности за период Октябрь 2025 — Январь 2026
             </p>
           </div>
 
-          {/* Key Metrics Cards */}
+          {/* Key Metrics Cards - ОБНОВЛЕНО */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card className="bg-primary text-primary-foreground border-none shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -94,8 +101,8 @@ export default function Home() {
                 <Users className="h-4 w-4 text-primary-foreground/70" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">2 575</div>
-                <p className="text-xs text-primary-foreground/70 mt-1">Потенциальных клиентов</p>
+                <div className="text-3xl font-bold">8 404</div>
+                <p className="text-xs text-primary-foreground/70 mt-1">За 4 месяца</p>
               </CardContent>
             </Card>
             
@@ -105,8 +112,8 @@ export default function Home() {
                 <FileSignature className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">1 410</div>
-                <p className="text-xs text-muted-foreground mt-1">55% конверсия из заявки</p>
+                <div className="text-3xl font-bold">2 299</div>
+                <p className="text-xs text-muted-foreground mt-1">27.4% конверсия из заявки</p>
               </CardContent>
             </Card>
             
@@ -116,11 +123,8 @@ export default function Home() {
                 <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">169</div>
-                <p className="text-xs text-muted-foreground mt-1">12% от подписанных</p>
-                <div className="mt-2 text-[10px] bg-yellow-50 text-yellow-800 px-2 py-1 rounded border border-yellow-100">
-                  M3 повысил одобрение на 9.5%
-                </div>
+                <div className="text-3xl font-bold">546</div>
+                <p className="text-xs text-muted-foreground mt-1">23.7% от согласий</p>
               </CardContent>
             </Card>
             
@@ -130,8 +134,8 @@ export default function Home() {
                 <TrendingDown className="h-4 w-4 text-green-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-green-600">$0.87</div>
-                <p className="text-xs text-muted-foreground mt-1">↓ в 9 раз дешевле (было $7.92)</p>
+                <div className="text-3xl font-bold text-green-600">$0.48</div>
+                <p className="text-xs text-muted-foreground mt-1">↓ в 13 раз дешевле (было $6.25)</p>
               </CardContent>
             </Card>
           </div>
@@ -142,9 +146,10 @@ export default function Home() {
                 <Lightbulb className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-lg mb-1">Главный итог месяца</h3>
+                <h3 className="font-semibold text-lg mb-1">Главный итог периода</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  В декабре мы научились привлекать клиентов в 9 раз дешевле, чем раньше, и нашли самый эффективный способ взаимодействия с ними через интерактивные квизы. Это позволит значительно масштабировать привлечение клиентов при том же бюджете в следующем квартале.
+                  За 4 месяца мы привлекли более 8 400 лидов и снизили стоимость привлечения в 13 раз благодаря кампании IP promo. 
+                  Лучший показатель конверсии в одобрение демонстрирует Direct/Organic трафик (35%), а также WhatsApp реактивация (21.6%).
                 </p>
               </div>
             </div>
@@ -153,7 +158,7 @@ export default function Home() {
 
         <Separator />
 
-        {/* Historical Data Section (New) */}
+        {/* Historical Data Section - ОБНОВЛЕНО */}
         <section id="history" className="space-y-8">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-indigo-100 rounded-lg text-indigo-700">
@@ -161,34 +166,81 @@ export default function Home() {
             </div>
             <div>
               <h2 className="text-2xl font-bold tracking-tight">Динамика (MoM)</h2>
-              <p className="text-muted-foreground">Сравнение показателей за последние 3 месяца</p>
+              <p className="text-muted-foreground">Сравнение показателей за последние 4 месяца</p>
             </div>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle>Рост количества лидов и одобрений</CardTitle>
-              <CardDescription>Динамика Октябрь - Декабрь 2025</CardDescription>
+              <CardTitle>Воронка: Лиды → Согласия → Одобрения</CardTitle>
+              <CardDescription>Октябрь 2025 — Январь 2026 (*до 9 января)</CardDescription>
             </CardHeader>
-            <CardContent className="h-[300px]">
+            <CardContent className="h-[350px]">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={historicalData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                <ComposedChart data={historicalData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis yAxisId="left" />
                   <YAxis yAxisId="right" orientation="right" />
                   <Tooltip />
                   <Legend />
-                  <Line yAxisId="left" type="monotone" dataKey="leads" name="Лиды" stroke="var(--primary)" strokeWidth={2} activeDot={{ r: 8 }} />
-                </LineChart>
+                  <Bar yAxisId="left" dataKey="leads" name="Лиды" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                  <Bar yAxisId="left" dataKey="consents" name="Согласия" fill="#22c55e" radius={[4, 4, 0, 0]} />
+                  <Line yAxisId="right" type="monotone" dataKey="approved" name="Одобрено" stroke="#f59e0b" strokeWidth={3} dot={{ fill: '#f59e0b', strokeWidth: 2 }} />
+                </ComposedChart>
               </ResponsiveContainer>
             </CardContent>
+          </Card>
+
+          {/* Summary Table */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Сводка по месяцам</CardTitle>
+            </CardHeader>
+            <div className="relative w-full overflow-auto">
+              <table className="w-full caption-bottom text-sm">
+                <thead className="[&_tr]:border-b">
+                  <tr className="border-b">
+                    <th className="h-12 px-4 text-left font-medium">Месяц</th>
+                    <th className="h-12 px-4 text-right font-medium">Лиды</th>
+                    <th className="h-12 px-4 text-right font-medium">Согласия</th>
+                    <th className="h-12 px-4 text-right font-medium">CR Согласий</th>
+                    <th className="h-12 px-4 text-right font-medium">Одобрено</th>
+                    <th className="h-12 px-4 text-right font-medium">CR Одобрения</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {historicalData.map((row) => (
+                    <tr key={row.name} className="border-b hover:bg-muted/50">
+                      <td className="p-4 font-medium">{row.name}</td>
+                      <td className="p-4 text-right">{row.leads.toLocaleString()}</td>
+                      <td className="p-4 text-right">{row.consents.toLocaleString()}</td>
+                      <td className="p-4 text-right">{((row.consents / row.leads) * 100).toFixed(1)}%</td>
+                      <td className="p-4 text-right font-bold text-green-700">{row.approved}</td>
+                      <td className="p-4 text-right">
+                        <Badge variant={((row.approved / row.consents) * 100) > 20 ? "default" : "secondary"}>
+                          {((row.approved / row.consents) * 100).toFixed(1)}%
+                        </Badge>
+                      </td>
+                    </tr>
+                  ))}
+                  <tr className="bg-muted/50 font-bold">
+                    <td className="p-4">ИТОГО</td>
+                    <td className="p-4 text-right">8 404</td>
+                    <td className="p-4 text-right">2 299</td>
+                    <td className="p-4 text-right">27.4%</td>
+                    <td className="p-4 text-right text-green-700">546</td>
+                    <td className="p-4 text-right">23.7%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </Card>
         </section>
 
         <Separator />
 
-        {/* Channel Comparison Table (Updated) */}
+        {/* Channel Comparison Table - Декабрь 2025 */}
         <section id="channels" className="space-y-8">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-slate-100 rounded-lg text-slate-700">
@@ -196,7 +248,7 @@ export default function Home() {
             </div>
             <div>
               <h2 className="text-2xl font-bold tracking-tight">Сводная таблица по каналам</h2>
-              <p className="text-muted-foreground">Детальная воронка: Лид → Подписание → Одобрение</p>
+              <p className="text-muted-foreground">Декабрь 2025: Лид → Согласие → Одобрение</p>
             </div>
           </div>
 
@@ -207,10 +259,10 @@ export default function Home() {
                   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                     <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Канал</th>
                     <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Лиды</th>
-                    <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground bg-slate-50">Подписано</th>
-                    <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground bg-slate-50">Conv. to Sign</th>
+                    <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground bg-slate-50">Согласия</th>
+                    <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground bg-slate-50">CR Согласий</th>
                     <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Одобрено</th>
-                    <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Approval Rate</th>
+                    <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">CR Одобрения</th>
                     <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Комментарий</th>
                   </tr>
                 </thead>
@@ -225,7 +277,7 @@ export default function Home() {
                       </td>
                       <td className="p-4 align-middle text-right font-bold text-green-700">{row.approved}</td>
                       <td className="p-4 align-middle text-right">
-                        <Badge variant={row.rate > 5 ? "default" : "secondary"} className={row.rate > 5 ? "bg-green-600 hover:bg-green-700" : ""}>
+                        <Badge variant={row.rate > 15 ? "default" : "secondary"} className={row.rate > 15 ? "bg-green-600 hover:bg-green-700" : ""}>
                           {row.rate}%
                         </Badge>
                       </td>
@@ -233,12 +285,12 @@ export default function Home() {
                     </tr>
                   ))}
                   <tr className="bg-muted/50 font-bold">
-                    <td className="p-4 align-middle">ИТОГО</td>
-                    <td className="p-4 align-middle text-right">2 575</td>
-                    <td className="p-4 align-middle text-right">1 410</td>
-                    <td className="p-4 align-middle text-right">55%</td>
-                    <td className="p-4 align-middle text-right text-green-700">169</td>
-                    <td className="p-4 align-middle text-right">6.6%</td>
+                    <td className="p-4 align-middle">ИТОГО (Декабрь)</td>
+                    <td className="p-4 align-middle text-right">{decemberTotal.leads.toLocaleString()}</td>
+                    <td className="p-4 align-middle text-right">{decemberTotal.signed}</td>
+                    <td className="p-4 align-middle text-right">{((decemberTotal.signed / decemberTotal.leads) * 100).toFixed(1)}%</td>
+                    <td className="p-4 align-middle text-right text-green-700">{decemberTotal.approved}</td>
+                    <td className="p-4 align-middle text-right">{((decemberTotal.approved / decemberTotal.signed) * 100).toFixed(1)}%</td>
                     <td className="p-4 align-middle"></td>
                   </tr>
                 </tbody>
@@ -249,7 +301,7 @@ export default function Home() {
 
         <Separator />
 
-        {/* Meta Ads Section */}
+        {/* Meta Ads Section - ОБНОВЛЕНО */}
         <section id="meta" className="space-y-8">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-blue-100 rounded-lg text-blue-700">
@@ -257,7 +309,7 @@ export default function Home() {
             </div>
             <div>
               <h2 className="text-2xl font-bold tracking-tight">Meta Ads (Facebook & Instagram)</h2>
-              <p className="text-muted-foreground">Стратегия двух этапов: Охват + Лидогенерация</p>
+              <p className="text-muted-foreground">Стратегия: Awareness + IP Promo кампания</p>
             </div>
           </div>
 
@@ -265,7 +317,7 @@ export default function Home() {
             <Card>
               <CardHeader>
                 <CardTitle>Снижение стоимости лида (CPL)</CardTitle>
-                <CardDescription>Сравнение средней стоимости заявки с историческими данными</CardDescription>
+                <CardDescription>Сравнение реального CPL (расходы / CRM лиды)</CardDescription>
               </CardHeader>
               <CardContent className="h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
@@ -289,7 +341,7 @@ export default function Home() {
             <div className="space-y-6">
               <div className="grid gap-4 grid-cols-2">
                 <div className="p-4 border rounded-lg bg-muted/30">
-                  <div className="text-sm text-muted-foreground mb-1">Охват кампании</div>
+                  <div className="text-sm text-muted-foreground mb-1">Охват (AWARENESS)</div>
                   <div className="text-2xl font-bold">493 270</div>
                   <div className="text-xs text-muted-foreground">Уникальных пользователей</div>
                 </div>
@@ -299,21 +351,21 @@ export default function Home() {
                   <div className="text-xs text-muted-foreground">Всего просмотров</div>
                 </div>
                 <div className="p-4 border rounded-lg bg-muted/30">
-                  <div className="text-sm text-muted-foreground mb-1">Запомнили рекламу</div>
-                  <div className="text-2xl font-bold">18 330</div>
-                  <div className="text-xs text-muted-foreground">Ad Recall Lift</div>
+                  <div className="text-sm text-muted-foreground mb-1">Meta Leadgen расходы</div>
+                  <div className="text-2xl font-bold">$1,763</div>
+                  <div className="text-xs text-muted-foreground">За 4 месяца</div>
                 </div>
                 <div className="p-4 border rounded-lg bg-green-50 border-green-100">
                   <div className="text-sm text-green-700 mb-1">Экономия бюджета</div>
-                  <div className="text-2xl font-bold text-green-700">-89%</div>
-                  <div className="text-xs text-green-600">Снижение затрат на лид</div>
+                  <div className="text-2xl font-bold text-green-700">-92%</div>
+                  <div className="text-xs text-green-600">Снижение CPL</div>
                 </div>
               </div>
               <div className="p-4 bg-muted rounded-lg text-sm">
                 <p className="font-medium mb-2">💡 Инсайт:</p>
                 <p className="text-muted-foreground">
-                  Запуск кампании на узнаваемость (Awareness) перед лидогенерацией позволил "прогреть" аудиторию. 
-                  В результате, когда мы запустили сбор заявок, пользователи уже знали бренд, что снизило стоимость целевого действия.
+                  Кампания IP promo (декабрь-январь) показала рекордно низкий CPL: $0.87 в декабре и $0.48 в январе. 
+                  Это в 13 раз дешевле, чем было в октябре ($6.25). Стратегия прогрева аудитории через AWARENESS работает.
                 </p>
               </div>
             </div>
@@ -377,6 +429,63 @@ export default function Home() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Google Ads Summary */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Google Ads: Сводка по месяцам</CardTitle>
+            </CardHeader>
+            <div className="relative w-full overflow-auto">
+              <table className="w-full caption-bottom text-sm">
+                <thead className="[&_tr]:border-b">
+                  <tr className="border-b">
+                    <th className="h-12 px-4 text-left font-medium">Месяц</th>
+                    <th className="h-12 px-4 text-right font-medium">Расходы</th>
+                    <th className="h-12 px-4 text-right font-medium">Конверсии (кабинет)</th>
+                    <th className="h-12 px-4 text-right font-medium">CRM Лиды</th>
+                    <th className="h-12 px-4 text-right font-medium">Реальный CPL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-4 font-medium">Октябрь</td>
+                    <td className="p-4 text-right">$1,413.10</td>
+                    <td className="p-4 text-right">140</td>
+                    <td className="p-4 text-right">99</td>
+                    <td className="p-4 text-right font-bold">$14.27</td>
+                  </tr>
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-4 font-medium">Ноябрь</td>
+                    <td className="p-4 text-right">$1,096.27</td>
+                    <td className="p-4 text-right">190</td>
+                    <td className="p-4 text-right">134</td>
+                    <td className="p-4 text-right font-bold">$8.18</td>
+                  </tr>
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-4 font-medium">Декабрь</td>
+                    <td className="p-4 text-right">$2,843.14</td>
+                    <td className="p-4 text-right">790</td>
+                    <td className="p-4 text-right">787</td>
+                    <td className="p-4 text-right font-bold text-green-600">$3.61</td>
+                  </tr>
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-4 font-medium">Январь*</td>
+                    <td className="p-4 text-right">$850.42</td>
+                    <td className="p-4 text-right">196</td>
+                    <td className="p-4 text-right">217</td>
+                    <td className="p-4 text-right font-bold text-green-600">$3.92</td>
+                  </tr>
+                  <tr className="bg-muted/50 font-bold">
+                    <td className="p-4">ИТОГО</td>
+                    <td className="p-4 text-right">$6,202.93</td>
+                    <td className="p-4 text-right">1,316</td>
+                    <td className="p-4 text-right">1,237</td>
+                    <td className="p-4 text-right">$5.01</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </Card>
         </section>
 
         <Separator />
@@ -390,7 +499,7 @@ export default function Home() {
               </div>
               <div>
                 <h2 className="text-2xl font-bold tracking-tight">Push-кампания</h2>
-                <p className="text-muted-foreground">OnlineBank (1 декабря)</p>
+                <p className="text-muted-foreground">OnlineBank (декабрь)</p>
               </div>
             </div>
             
@@ -404,15 +513,15 @@ export default function Home() {
                   </div>
                   <div className="w-2/3 space-y-4">
                     <div>
-                      <div className="text-sm text-muted-foreground">Результат</div>
-                      <div className="text-3xl font-bold">132 Лида</div>
+                      <div className="text-sm text-muted-foreground">Результат (декабрь)</div>
+                      <div className="text-3xl font-bold">71 Лид</div>
                     </div>
                     <div>
-                      <div className="text-sm text-muted-foreground">Статус</div>
-                      <div className="text-sm font-medium">Ожидаем данные по просмотрам и кликам от банка.</div>
+                      <div className="text-sm text-muted-foreground">Согласия / Одобрено</div>
+                      <div className="text-lg font-medium">18 / 1</div>
                     </div>
                     <div className="p-3 bg-yellow-50 text-yellow-800 text-xs rounded border border-yellow-100">
-                      Кампания вела на Маркетплейс, так как Квиз еще не был запущен.
+                      Канал требует оптимизации. CR одобрения: 5.6%
                     </div>
                   </div>
                 </div>
@@ -426,7 +535,7 @@ export default function Home() {
                 <MessageSquare className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold tracking-tight">WABA (WhatsApp)</h2>
+                <h2 className="text-2xl font-bold tracking-tight">WhatsApp (WABA)</h2>
                 <p className="text-muted-foreground">Реактивация отказников</p>
               </div>
             </div>
@@ -435,42 +544,33 @@ export default function Home() {
               <CardContent className="pt-6">
                 <div className="space-y-4">
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground">Отправлено</span>
-                    <span className="font-bold">1 100</span>
-                  </div>
-                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div className="bg-slate-300 h-full" style={{ width: '100%' }}></div>
-                  </div>
-                  
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground">Прочитано (OR 82%)</span>
-                    <span className="font-bold">906</span>
-                  </div>
-                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div className="bg-green-300 h-full" style={{ width: '82%' }}></div>
-                  </div>
-
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground">Кликнули (CTR 16%)</span>
-                    <span className="font-bold">179</span>
-                  </div>
-                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div className="bg-green-500 h-full" style={{ width: '16%' }}></div>
-                  </div>
-
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground">Заявки (CR 40%)</span>
+                    <span className="text-muted-foreground">Лиды (декабрь)</span>
                     <span className="font-bold">73</span>
                   </div>
                   <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div className="bg-green-600 h-full" style={{ width: '6.6%' }}></div>
+                    <div className="bg-green-500 h-full" style={{ width: '100%' }}></div>
+                  </div>
+                  
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-muted-foreground">Согласия (CR 50.7%)</span>
+                    <span className="font-bold">37</span>
+                  </div>
+                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div className="bg-green-600 h-full" style={{ width: '50.7%' }}></div>
+                  </div>
+
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-muted-foreground">Одобрено (CR 21.6%)</span>
+                    <span className="font-bold">8</span>
+                  </div>
+                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div className="bg-green-700 h-full" style={{ width: '21.6%' }}></div>
                   </div>
                   
                   <div className="pt-2 flex justify-between items-center">
                     <Badge variant="outline" className="text-green-700 border-green-200 bg-green-50">
-                      8 Одобрено
+                      Лучший CR одобрения среди платных каналов
                     </Badge>
-                    <span className="text-xs text-muted-foreground">Стоимость клика: $0.30</span>
                   </div>
                 </div>
               </CardContent>
@@ -544,7 +644,7 @@ export default function Home() {
           </Tabs>
         </section>
 
-        {/* Roadmap Section (Updated) */}
+        {/* Roadmap Section */}
         <section id="roadmap" className="space-y-8 pb-10">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-yellow-100 rounded-lg text-yellow-700">
@@ -612,6 +712,12 @@ export default function Home() {
                 </p>
               </CardContent>
             </Card>
+          </div>
+
+          <div className="flex justify-center">
+            <Link href="/#/analytics" className="text-primary hover:underline text-sm font-medium">
+              Смотреть детальную CRM аналитику →
+            </Link>
           </div>
         </section>
 
