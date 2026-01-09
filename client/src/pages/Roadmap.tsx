@@ -24,6 +24,7 @@ export default function Roadmap() {
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
             <Link href="/" className="hover:text-foreground transition-colors">Отчет</Link>
+            <Link href="/analytics" className="hover:text-foreground transition-colors">CRM Analytics</Link>
             <span className="text-foreground">Планы (Roadmap)</span>
           </nav>
           <div className="text-sm text-muted-foreground">

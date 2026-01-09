@@ -66,6 +66,7 @@ export default function Home() {
             <a href="#history" className="hover:text-foreground transition-colors">Динамика</a>
             <a href="#channels" className="hover:text-foreground transition-colors">Каналы</a>
             <a href="#meta" className="hover:text-foreground transition-colors">Meta Ads</a>
+            <Link href="/analytics" className="hover:text-foreground transition-colors">CRM Analytics</Link>
             <Link href="/roadmap" className="hover:text-foreground transition-colors">Планы</Link>
           </nav>
           <div className="text-sm text-muted-foreground">
