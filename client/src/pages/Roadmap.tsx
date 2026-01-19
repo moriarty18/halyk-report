@@ -6,7 +6,7 @@ import {
   MessageSquare, Smartphone, Globe, ArrowRight,
   CheckCircle2, Clock, AlertCircle, Mail, Video,
   Building2, Megaphone, Users, Monitor, Send,
-  FileText, Palette, BarChart3, Handshake
+  FileText, Palette, BarChart3, Handshake, Code, Layout, Sparkles, Share2
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -139,6 +139,47 @@ const activities: Activity[] = [
       { text: "Размещение информации о программах на сайтах партнеров", status: "pending", deadline: "Март" },
       { text: "Организация совместных мероприятий/вебинаров (при необходимости)", status: "pending", deadline: "Q2 2026" },
     ]
+  },
+  {
+    id: 6,
+    title: "Редизайн сайта halykls.kz: новые разделы",
+    description: "Добавление разделов 'Общие продукты' (финансовый лизинг, рассрочка) и 'Спецпредложения' (партнерские программы)",
+    icon: <Layout className="h-6 w-6" />,
+    color: "bg-indigo-100 text-indigo-700",
+    borderColor: "border-l-indigo-500",
+    badge: "Веб-разработка",
+    badgeVariant: "secondary",
+    steps: [
+      { text: "Продукт-менеджер готовит контент для новых разделов: 'Общие продукты' и 'Спецпредложения'", status: "pending", deadline: "31 января" },
+      { text: "Разработка технического задания на дизайн страниц", status: "pending", deadline: "7 февраля" },
+      { text: "Дизайн страницы 'Общие продукты' (финансовый лизинг, рассрочка)", status: "pending", deadline: "14 февраля" },
+      { text: "Дизайн страницы 'Спецпредложения' (партнерские программы)", status: "pending", deadline: "14 февраля" },
+      { text: "Копирайтинг и подготовка текстов для обеих страниц", status: "pending", deadline: "21 февраля" },
+      { text: "Верстка и программирование новых разделов", status: "pending", deadline: "28 февраля" },
+      { text: "Тестирование функциональности и адаптивности", status: "pending", deadline: "5 марта" },
+      { text: "Публикация обновлений на halykls.kz", status: "pending", deadline: "7 марта" },
+    ]
+  },
+  {
+    id: 7,
+    title: "Интеграция событий 'Одобрение' в рекламные системы",
+    description: "Передача событий 'Подписано согласие' и 'Одобрено' через Server-Side API в Meta, TikTok, Google Ads для оптимизации алгоритмов",
+    icon: <Share2 className="h-6 w-6" />,
+    color: "bg-rose-100 text-rose-700",
+    borderColor: "border-l-rose-500",
+    badge: "Аналитика",
+    badgeVariant: "secondary",
+    steps: [
+      { text: "Анализ текущей интеграции через gateway (событие 'Заполнена заявка')", status: "pending", deadline: "25 января" },
+      { text: "Определение параметров для новых событий: 'Подписано согласие' и 'Одобрено'", status: "pending", deadline: "31 января" },
+      { text: "Разработка технического задания для интеграции с CRM", status: "pending", deadline: "7 февраля" },
+      { text: "Настройка передачи событий в Meta Conversions API", status: "pending", deadline: "14 февраля" },
+      { text: "Настройка передачи событий в TikTok Events API", status: "pending", deadline: "14 февраля" },
+      { text: "Настройка передачи событий в Google Ads API (Enhanced Conversions)", status: "pending", deadline: "14 февраля" },
+      { text: "Тестирование передачи данных и валидация событий", status: "pending", deadline: "21 февраля" },
+      { text: "Запуск в production и мониторинг корректности данных", status: "pending", deadline: "28 февраля" },
+      { text: "Анализ влияния на эффективность рекламных кампаний", status: "pending", deadline: "Март" },
+    ]
   }
 ];
 
@@ -173,7 +214,7 @@ export default function Roadmap() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="text-primary border-primary">Q1 2026</Badge>
-            <Badge variant="secondary">5 ключевых активностей</Badge>
+            <Badge variant="secondary">7 ключевых активностей</Badge>
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl">Дорожная карта продвижения</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
@@ -297,7 +338,7 @@ export default function Roadmap() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Card>
             <CardContent className="pt-6">
-              <div className="text-3xl font-bold text-primary">5</div>
+              <div className="text-3xl font-bold text-primary">7</div>
               <div className="text-sm text-muted-foreground">Ключевых активностей</div>
             </CardContent>
           </Card>
