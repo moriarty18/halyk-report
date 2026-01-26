@@ -12,6 +12,7 @@ import {
   Info, ArrowUpRight, ArrowDownRight
 } from "lucide-react";
 import { Link } from "wouter";
+import { Badge } from "@/components/ui/badge";
 
 // =============================================
 // ДАННЫЕ ИЗ CRM (ОБНОВЛЕНО 9 ЯНВАРЯ 2026)
@@ -215,7 +216,8 @@ export default function Analytics() {
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
             <Link href="/" className="hover:text-foreground transition-colors">Отчет</Link>
-            <span className="text-foreground">CRM Analytics</span>
+            <span className="text-foreground">Аналитика (Дек)</span>
+            <Link href="/analytics-january" className="hover:text-foreground transition-colors">Аналитика (Янв)</Link>
             <Link href="/roadmap" className="hover:text-foreground transition-colors">Планы</Link>
           </nav>
           <div className="text-sm text-muted-foreground">
@@ -236,6 +238,18 @@ export default function Analytics() {
               <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl">CRM Analytics</h1>
               <p className="text-muted-foreground">Детальный анализ воронки продаж за 4 месяца</p>
             </div>
+          </div>
+          
+          {/* Month Tabs */}
+          <div className="flex gap-2">
+            <Badge className="px-4 py-2 text-sm">
+              Декабрь 2025
+            </Badge>
+            <Link href="/analytics-january">
+              <Badge variant="outline" className="cursor-pointer hover:bg-muted px-4 py-2 text-sm">
+                Январь 2026
+              </Badge>
+            </Link>
           </div>
           
           {/* Info Banner */}

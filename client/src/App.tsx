@@ -8,6 +8,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "@/pages/Home";
 import Roadmap from "@/pages/Roadmap";
 import Analytics from "@/pages/Analytics";
+import AnalyticsJanuary from "@/pages/AnalyticsJanuary";
 
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
        <Route path="/" component={Home} />
       <Route path="/roadmap" component={Roadmap} />
       <Route path="/analytics" component={Analytics} />
+      <Route path="/analytics-january" component={AnalyticsJanuary} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
