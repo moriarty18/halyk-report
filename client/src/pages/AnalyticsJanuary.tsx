@@ -15,8 +15,8 @@ import { Link } from "wouter";
 
 // =============================================
 // ДАННЫЕ ИЗ РЕКЛАМНЫХ КАБИНЕТОВ (ЯНВАРЬ 2026)
-// С ДЕДУПЛИКАЦИЕЙ ПО БИН (174 одобренных)
-// =============================================
+// С ДЕДУПЛИКАЦИЕЙ ПО БИН (207 одобренных, 1-31 января)
+// =============================================================================
 
 // Google Ads данные по неделям (с дедупликацией по БИН)
 const googleAdsWeekly = [
@@ -76,6 +76,20 @@ const googleAdsWeekly = [
     cr_consent: 27.5,
     cr_approved: 27.8
   },
+  { 
+    week: 'Неделя 5', 
+    period: '26 янв-1 фев',
+    impressions: 7153, 
+    clicks: 1774, 
+    leads: 115, 
+    consents: 35, 
+    approved: 6,
+    cost: 655.03,
+    ctr: 24.80,
+    cr_lead: 6.48,
+    cr_consent: 30.4,
+    cr_approved: 17.1
+  },
 ];
 
 // Meta Ads данные по неделям (с дедупликацией по БИН)
@@ -131,6 +145,19 @@ const metaAdsWeekly = [
     cr_lead: 0.70,
     cr_consent: 14.0,
     cr_approved: 34.6
+  },
+  { 
+    week: 'Неделя 5', 
+    period: '26 янв-1 фев',
+    impressions: 26519, 
+    reach: 48376,
+    leads: 174, 
+    consents: 24, 
+    approved: 5,
+    cost: 176.05,
+    cr_lead: 0.66,
+    cr_consent: 13.8,
+    cr_approved: 20.8
   },
 ];
 
@@ -188,6 +215,21 @@ const tiktokAdsWeekly = [
     cr_approved: 100.0,
     active: true
   },
+  { 
+    week: 'Неделя 5', 
+    period: '26 янв-1 фев',
+    impressions: 79786, 
+    clicks: 186, 
+    leads: 10, 
+    consents: 1, 
+    approved: 0,
+    cost: 28.07,
+    ctr: 0.23,
+    cr_lead: 5.38,
+    cr_consent: 10.0,
+    cr_approved: 0,
+    active: true
+  },
 ];
 
 // Kolesa данные по неделям (с дедупликацией по БИН, включая автора kolesa)
@@ -227,6 +269,15 @@ const kolesaWeekly = [
     approved: 13,
     cr_consent: 15.2,
     cr_approved: 20.6
+  },
+  { 
+    week: 'Неделя 5', 
+    period: '26 янв-1 фев',
+    leads: 353, 
+    consents: 36, 
+    approved: 6,
+    cr_consent: 10.2,
+    cr_approved: 16.7
   },
 ];
 
@@ -268,6 +319,15 @@ const managersWeekly = [
     cr_consent: 86.4,
     cr_approved: 39.2
   },
+  { 
+    week: 'Неделя 5', 
+    period: '26 янв-1 фев',
+    leads: 49, 
+    consents: 43, 
+    approved: 13,
+    cr_consent: 87.8,
+    cr_approved: 30.2
+  },
 ];
 
 // Органика данные по неделям (без менеджеров, с дедупликацией по БИН)
@@ -308,6 +368,15 @@ const organicWeekly = [
     cr_consent: 57.9,
     cr_approved: 25.0
   },
+  { 
+    week: 'Неделя 5', 
+    period: '26 янв-1 фев',
+    leads: 83, 
+    consents: 36, 
+    approved: 3,
+    cr_consent: 43.4,
+    cr_approved: 8.3
+  },
 ];
 
 // Данные по менеджерам (с дедупликацией по БИН)
@@ -325,69 +394,69 @@ const managersData = [
 const channelTotals = [
   {
     channel: 'Google Ads',
-    impressions: 33726,
-    clicks: 8035,
-    leads: 440,
-    consents: 91,
-    approved: 22,
-    cost: 2490.91,
-    ctr: 23.82,
-    cr_lead: 5.48,
-    cr_consent: 20.7,
-    cr_approved: 24.2,
-    cpl: 5.66
+    impressions: 40879,
+    clicks: 9809,
+    leads: 555,
+    consents: 126,
+    approved: 28,
+    cost: 3145.94,
+    ctr: 24.0,
+    cr_lead: 5.66,
+    cr_consent: 22.7,
+    cr_approved: 22.2,
+    cpl: 5.67
   },
   {
     channel: 'Meta Ads',
-    impressions: 195127,
-    reach: 105092,
-    leads: 771,
-    consents: 102,
-    approved: 28,
-    cost: 625.37,
-    cr_lead: 0.40,
-    cr_consent: 13.2,
-    cr_approved: 27.5,
-    cpl: 0.81
+    impressions: 221646,
+    reach: 153468,
+    leads: 945,
+    consents: 126,
+    approved: 33,
+    cost: 801.42,
+    cr_lead: 0.43,
+    cr_consent: 13.3,
+    cr_approved: 26.2,
+    cpl: 0.85
   },
   {
     channel: 'TikTok Ads',
-    impressions: 243749,
-    clicks: 658,
-    leads: 52,
-    consents: 2,
+    impressions: 323535,
+    clicks: 844,
+    leads: 62,
+    consents: 3,
     approved: 1,
-    cost: 171.93,
-    ctr: 0.27,
-    cr_lead: 7.90,
-    cr_consent: 3.8,
-    cr_approved: 50.0,
-    cpl: 3.31,
+    cost: 200.0,
+    ctr: 0.26,
+    cr_lead: 7.35,
+    cr_consent: 4.8,
+    cr_approved: 33.3,
+    cpl: 3.23,
     note: 'Запущен с 15 января'
   },
   {
     channel: 'Kolesa',
-    leads: 1316,
-    consents: 175,
-    approved: 42,
-    cr_consent: 13.3,
-    cr_approved: 24.0
+    leads: 1669,
+    consents: 211,
+    approved: 48,
+    cr_consent: 12.6,
+    cr_approved: 22.7
   },
   {
     channel: 'Менеджеры',
-    leads: 144,
-    consents: 119,
-    approved: 50,
-    cr_consent: 82.6,
-    cr_approved: 42.0
+    leads: 193,
+    consents: 162,
+    approved: 63,
+    cr_consent: 83.9,
+    cr_approved: 38.9
   },
   {
     channel: 'Органика',
-    leads: 201,
-    consents: 120,
-    approved: 31,
-    cr_consent: 59.7,
-    cr_approved: 25.8
+    leads: 284,
+    consents: 156,
+    approved: 34,
+    cr_consent: 54.9,
+    cr_approved: 21.8
   },
 ];
 
@@ -428,6 +497,15 @@ const weeklyFunnelData = [
     'Kolesa': 414,
     'Менеджеры': 59,
     'Органика': 76
+  },
+  { 
+    week: 'Неделя 5',
+    'Google Ads': 115,
+    'Meta Ads': 174,
+    'TikTok Ads': 10,
+    'Kolesa': 353,
+    'Менеджеры': 49,
+    'Органика': 83
   },
 ];
 
