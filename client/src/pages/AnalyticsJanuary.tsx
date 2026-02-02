@@ -15,7 +15,7 @@ import { Link } from "wouter";
 
 // =============================================
 // ДАННЫЕ ИЗ РЕКЛАМНЫХ КАБИНЕТОВ (ЯНВАРЬ 2026)
-// С ДЕДУПЛИКАЦИЕЙ ПО БИН (207 одобренных, 1-31 января)
+// С ДЕДУПЛИКАЦИЕЙ ПО БИН (207 одобренных, 1 января - 1 февраля)
 // =============================================================================
 
 // Google Ads данные по неделям (с дедупликацией по БИН)
@@ -546,7 +546,7 @@ export default function AnalyticsJanuary() {
             <Link href="/roadmap" className="hover:text-foreground transition-colors">Планы</Link>
           </nav>
           <div className="text-sm text-muted-foreground">
-            Январь 2026 (1-25)
+            1 января - 1 февраля 2026
           </div>
         </div>
       </header>
@@ -561,7 +561,7 @@ export default function AnalyticsJanuary() {
             </div>
             <div>
               <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl">Воронка продаж — Январь 2026</h1>
-              <p className="text-muted-foreground mt-1">Период: 1-25 января 2026 | Данные с дедупликацией по БИН</p>
+              <p className="text-muted-foreground mt-1">Период: 1 января - 1 февраля 2026 | Данные с дедупликацией по БИН</p>
             </div>
           </div>
           
@@ -775,7 +775,7 @@ export default function AnalyticsJanuary() {
                     </table>
                   </div>
                   <div className="mt-4 text-sm text-muted-foreground">
-                    <p>CPL: ${(2490.91 / 440).toFixed(2)} | Cost per Consent: ${(2490.91 / 91).toFixed(2)} | Cost per Approval: ${(2490.91 / 22).toFixed(2)}</p>
+                    <p>CPL: ${(channelTotals[0].cost / channelTotals[0].leads).toFixed(2)} | Cost per Consent: ${(channelTotals[0].cost / channelTotals[0].consents).toFixed(2)} | Cost per Approval: ${(channelTotals[0].cost / channelTotals[0].approved).toFixed(2)}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -842,7 +842,7 @@ export default function AnalyticsJanuary() {
                     </table>
                   </div>
                   <div className="mt-4 text-sm text-muted-foreground">
-                    <p>CPL: ${(625.37 / 771).toFixed(2)} | Cost per Consent: ${(625.37 / 102).toFixed(2)} | Cost per Approval: ${(625.37 / 28).toFixed(2)}</p>
+                    <p>CPL: ${(channelTotals[1].cost / channelTotals[1].leads).toFixed(2)} | Cost per Consent: ${(channelTotals[1].cost / channelTotals[1].consents).toFixed(2)} | Cost per Approval: ${(channelTotals[1].cost / channelTotals[1].approved).toFixed(2)}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -912,7 +912,7 @@ export default function AnalyticsJanuary() {
                     </table>
                   </div>
                   <div className="mt-4 text-sm text-muted-foreground">
-                    <p>CPL: ${(171.93 / 52).toFixed(2)} | Cost per Consent: ${(171.93 / 2).toFixed(2)} | Cost per Approval: ${(171.93 / 1).toFixed(2)}</p>
+                    <p>CPL: ${(channelTotals[2].cost / channelTotals[2].leads).toFixed(2)} | Cost per Consent: ${(channelTotals[2].cost / channelTotals[2].consents).toFixed(2)} | Cost per Approval: ${(channelTotals[2].cost / channelTotals[2].approved).toFixed(2)}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -1174,15 +1174,25 @@ export default function AnalyticsJanuary() {
                       <td className="text-right py-3 px-4 font-mono">11</td>
                       <td className="text-right py-3 px-4 font-mono font-bold">64</td>
                     </tr>
+                    <tr className="border-b hover:bg-muted/50">
+                      <td className="py-3 px-4">Неделя 5 (26 янв-1 фев)</td>
+                      <td className="text-right py-3 px-4 font-mono">6</td>
+                      <td className="text-right py-3 px-4 font-mono">5</td>
+                      <td className="text-right py-3 px-4 font-mono">0</td>
+                      <td className="text-right py-3 px-4 font-mono">6</td>
+                      <td className="text-right py-3 px-4 font-mono">13</td>
+                      <td className="text-right py-3 px-4 font-mono">3</td>
+                      <td className="text-right py-3 px-4 font-mono font-bold">33</td>
+                    </tr>
                     <tr className="font-bold bg-muted/30">
                       <td className="py-3 px-4">ИТОГО</td>
-                      <td className="text-right py-3 px-4 font-mono">22</td>
                       <td className="text-right py-3 px-4 font-mono">28</td>
+                      <td className="text-right py-3 px-4 font-mono">33</td>
                       <td className="text-right py-3 px-4 font-mono">1</td>
-                      <td className="text-right py-3 px-4 font-mono">42</td>
-                      <td className="text-right py-3 px-4 font-mono">50</td>
-                      <td className="text-right py-3 px-4 font-mono">31</td>
-                      <td className="text-right py-3 px-4 font-mono">174</td>
+                      <td className="text-right py-3 px-4 font-mono">48</td>
+                      <td className="text-right py-3 px-4 font-mono">63</td>
+                      <td className="text-right py-3 px-4 font-mono">34</td>
+                      <td className="text-right py-3 px-4 font-mono">207</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1201,14 +1211,14 @@ export default function AnalyticsJanuary() {
               </CardTitle>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground space-y-2">
-              <p>• Период: 1-25 января 2026 года</p>
+              <p>• Период: 1 января - 1 февраля 2026 года</p>
               <p>• <strong>Данные с дедупликацией по БИН</strong> — учитываются уникальные компании, лучший статус для каждого БИН</p>
               <p>• <strong>TikTok Ads:</strong> Канал запущен с 15 января 2026</p>
               <p>• <strong>Kolesa:</strong> Включает заявки с utm_source=kolesa и автором kolesa из файла обработки</p>
               <p>• <strong>Менеджеры:</strong> Заявки добавленные менеджерами (kamzina.z, karashev.a, mamutbayeva.a, slamkenzhi.b, elkin.p, ertargyn.e, satbergenov.n)</p>
               <p>• <strong>Органика:</strong> Все заявки без UTM меток, исключая заявки менеджеров и Kolesa</p>
               <p>• <strong>CR (Conversion Rate):</strong> Рассчитывается от предыдущего этапа воронки</p>
-              <p>• <strong>Источник данных:</strong> UTM файл (utm Jan 1-26.xlsx), файл обработки заявок (Обработка заявок_2026-01-26.xlsx)</p>
+              <p>• <strong>Источник данных:</strong> CRM export, файл обработки заявок, рекламные кабинеты (Google Ads, Meta Ads, TikTok Ads)</p>
             </CardContent>
           </Card>
         </section>
