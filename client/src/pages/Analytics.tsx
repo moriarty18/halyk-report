@@ -12,7 +12,6 @@ import {
   Info, ArrowUpRight, ArrowDownRight
 } from "lucide-react";
 import { Link } from "wouter";
-import { Badge } from "@/components/ui/badge";
 
 // =============================================
 // ДАННЫЕ ИЗ CRM (ОБНОВЛЕНО 9 ЯНВАРЯ 2026)
@@ -218,6 +217,7 @@ export default function Analytics() {
             <Link href="/" className="hover:text-foreground transition-colors">Отчет</Link>
             <span className="text-foreground">Аналитика (Дек)</span>
             <Link href="/analytics-january" className="hover:text-foreground transition-colors">Аналитика (Янв)</Link>
+            <Link href="/analytics-february" className="hover:text-foreground transition-colors">Аналитика (Фев)</Link>
             <Link href="/roadmap" className="hover:text-foreground transition-colors">Планы</Link>
           </nav>
           <div className="text-sm text-muted-foreground">

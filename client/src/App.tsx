@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import Roadmap from "@/pages/Roadmap";
 import Analytics from "@/pages/Analytics";
 import AnalyticsJanuary from "@/pages/AnalyticsJanuary";
+import AnalyticsFebruary from "@/pages/AnalyticsFebruary";
 
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/roadmap" component={Roadmap} />
       <Route path="/analytics" component={Analytics} />
       <Route path="/analytics-january" component={AnalyticsJanuary} />
+      <Route path="/analytics-february" component={AnalyticsFebruary} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
