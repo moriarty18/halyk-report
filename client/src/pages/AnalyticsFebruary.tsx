@@ -19,6 +19,108 @@ import { Link } from "wouter";
 // С ДЕДУПЛИКАЦИЕЙ ПО БИН (52 одобренных)
 // =============================================================================
 
+// Исторические данные за недели 1-5 (из январского отчёта) для сравнения
+const weeklyComparison = [
+  {
+    week: 'Нед. 1', period: '1-4 янв',
+    google_leads: 54, google_consents: 7, google_approved: 2, google_cr_consent: 13.0, google_cr_approved: 28.6,
+    meta_leads: 151, meta_consents: 16, meta_approved: 4, meta_cr_consent: 10.6, meta_cr_approved: 25.0,
+    kolesa_leads: 153, kolesa_consents: 11, kolesa_approved: 1, kolesa_cr_consent: 7.2, kolesa_cr_approved: 9.1,
+    managers_leads: 0, managers_consents: 0, managers_approved: 0, managers_cr_consent: 0, managers_cr_approved: 0,
+    organic_leads: 13, organic_consents: 5, organic_approved: 0, organic_cr_consent: 38.5, organic_cr_approved: 0,
+    total_leads: 371, total_consents: 39, total_approved: 7, total_cr_consent: 10.5, total_cr_approved: 17.9,
+  },
+  {
+    week: 'Нед. 2', period: '5-11 янв',
+    google_leads: 139, google_consents: 23, google_approved: 7, google_cr_consent: 16.5, google_cr_approved: 30.4,
+    meta_leads: 241, meta_consents: 25, meta_approved: 7, meta_cr_consent: 10.4, meta_cr_approved: 28.0,
+    kolesa_leads: 355, kolesa_consents: 50, kolesa_approved: 16, kolesa_cr_consent: 14.1, kolesa_cr_approved: 32.0,
+    managers_leads: 29, managers_consents: 22, managers_approved: 6, managers_cr_consent: 75.9, managers_cr_approved: 27.3,
+    organic_leads: 46, organic_consents: 29, organic_approved: 8, organic_cr_consent: 63.0, organic_cr_approved: 27.6,
+    total_leads: 810, total_consents: 149, total_approved: 44, total_cr_consent: 18.4, total_cr_approved: 29.5,
+  },
+  {
+    week: 'Нед. 3', period: '12-18 янв',
+    google_leads: 116, google_consents: 25, google_approved: 3, google_cr_consent: 21.6, google_cr_approved: 12.0,
+    meta_leads: 193, meta_consents: 35, meta_approved: 8, meta_cr_consent: 18.1, meta_cr_approved: 22.9,
+    kolesa_leads: 394, kolesa_consents: 51, kolesa_approved: 12, kolesa_cr_consent: 12.9, kolesa_cr_approved: 23.5,
+    managers_leads: 56, managers_consents: 46, managers_approved: 24, managers_cr_consent: 82.1, managers_cr_approved: 52.2,
+    organic_leads: 66, organic_consents: 42, organic_approved: 12, organic_cr_consent: 63.6, organic_cr_approved: 28.6,
+    total_leads: 825, total_consents: 199, total_approved: 59, total_cr_consent: 24.1, total_cr_approved: 29.6,
+  },
+  {
+    week: 'Нед. 4', period: '19-25 янв',
+    google_leads: 131, google_consents: 36, google_approved: 10, google_cr_consent: 27.5, google_cr_approved: 27.8,
+    meta_leads: 186, meta_consents: 26, meta_approved: 9, meta_cr_consent: 14.0, meta_cr_approved: 34.6,
+    kolesa_leads: 414, kolesa_consents: 63, kolesa_approved: 13, kolesa_cr_consent: 15.2, kolesa_cr_approved: 20.6,
+    managers_leads: 59, managers_consents: 51, managers_approved: 20, managers_cr_consent: 86.4, managers_cr_approved: 39.2,
+    organic_leads: 76, organic_consents: 44, organic_approved: 11, organic_cr_consent: 57.9, organic_cr_approved: 25.0,
+    total_leads: 866, total_consents: 220, total_approved: 63, total_cr_consent: 25.4, total_cr_approved: 28.6,
+  },
+  {
+    week: 'Нед. 5', period: '26 янв-1 фев',
+    google_leads: 115, google_consents: 35, google_approved: 6, google_cr_consent: 30.4, google_cr_approved: 17.1,
+    meta_leads: 174, meta_consents: 24, meta_approved: 5, meta_cr_consent: 13.8, meta_cr_approved: 20.8,
+    kolesa_leads: 353, kolesa_consents: 36, kolesa_approved: 6, kolesa_cr_consent: 10.2, kolesa_cr_approved: 16.7,
+    managers_leads: 49, managers_consents: 43, managers_approved: 13, managers_cr_consent: 87.8, managers_cr_approved: 30.2,
+    organic_leads: 83, organic_consents: 36, organic_approved: 3, organic_cr_consent: 43.4, organic_cr_approved: 8.3,
+    total_leads: 774, total_consents: 174, total_approved: 33, total_cr_consent: 22.5, total_cr_approved: 19.0,
+  },
+  {
+    week: 'Нед. 6', period: '2-8 фев',
+    google_leads: 158, google_consents: 67, google_approved: 15, google_cr_consent: 42.4, google_cr_approved: 22.4,
+    meta_leads: 160, meta_consents: 45, meta_approved: 9, meta_cr_consent: 28.1, meta_cr_approved: 20.0,
+    kolesa_leads: 372, kolesa_consents: 113, kolesa_approved: 12, kolesa_cr_consent: 30.4, kolesa_cr_approved: 10.6,
+    managers_leads: 37, managers_consents: 32, managers_approved: 14, managers_cr_consent: 86.5, managers_cr_approved: 43.8,
+    organic_leads: 30, organic_consents: 17, organic_approved: 2, organic_cr_consent: 56.7, organic_cr_approved: 11.8,
+    total_leads: 757, total_consents: 274, total_approved: 52, total_cr_consent: 36.2, total_cr_approved: 19.0,
+  },
+];
+
+// Данные для графика динамики заявок по неделям
+const leadsChartData = weeklyComparison.map(w => ({
+  week: w.week,
+  'Google Ads': w.google_leads,
+  'Meta Ads': w.meta_leads,
+  'Kolesa': w.kolesa_leads,
+  'Менеджеры': w.managers_leads,
+  'Органика': w.organic_leads,
+  'Всего': w.total_leads,
+}));
+
+// Данные для графика динамики одобрений по неделям
+const approvedChartData = weeklyComparison.map(w => ({
+  week: w.week,
+  'Google Ads': w.google_approved,
+  'Meta Ads': w.meta_approved,
+  'Kolesa': w.kolesa_approved,
+  'Менеджеры': w.managers_approved,
+  'Органика': w.organic_approved,
+  'Всего': w.total_approved,
+}));
+
+// Данные для графика CR Согласий по неделям
+const crConsentChartData = weeklyComparison.map(w => ({
+  week: w.week,
+  'Google Ads': w.google_cr_consent,
+  'Meta Ads': w.meta_cr_consent,
+  'Kolesa': w.kolesa_cr_consent,
+  'Менеджеры': w.managers_cr_consent,
+  'Органика': w.organic_cr_consent,
+  'Среднее': w.total_cr_consent,
+}));
+
+// Данные для графика CR Одобрений по неделям
+const crApprovedChartData = weeklyComparison.map(w => ({
+  week: w.week,
+  'Google Ads': w.google_cr_approved,
+  'Meta Ads': w.meta_cr_approved,
+  'Kolesa': w.kolesa_cr_approved,
+  'Менеджеры': w.managers_cr_approved,
+  'Органика': w.organic_cr_approved,
+  'Среднее': w.total_cr_approved,
+}));
+
 // Google Ads данные — Неделя 6 (единственная неделя февраля пока)
 const googleAdsWeekly = [
   { 
@@ -707,6 +809,275 @@ export default function AnalyticsFebruary() {
               </Card>
             </TabsContent>
           </Tabs>
+        </section>
+
+        {/* Weekly Comparison Section */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Сравнение по неделям — Динамика показателей</h2>
+          
+          {/* Leads Comparison Table */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="text-base">Заявки по каналам (недели 1-6)</CardTitle>
+              <CardDescription>Количество уникальных заявок (дедупликация по БИН) по каждому каналу</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-3 px-3 font-medium">Неделя</th>
+                      <th className="text-right py-3 px-3 font-medium" style={{color: COLORS['Google Ads']}}>Google Ads</th>
+                      <th className="text-right py-3 px-3 font-medium" style={{color: COLORS['Meta Ads']}}>Meta Ads</th>
+                      <th className="text-right py-3 px-3 font-medium" style={{color: COLORS['Kolesa']}}>Kolesa</th>
+                      <th className="text-right py-3 px-3 font-medium" style={{color: COLORS['Менеджеры']}}>Менеджеры</th>
+                      <th className="text-right py-3 px-3 font-medium" style={{color: COLORS['Органика']}}>Органика</th>
+                      <th className="text-right py-3 px-3 font-medium font-bold">Всего</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {weeklyComparison.map((w, i) => (
+                      <tr key={i} className={`border-b hover:bg-muted/50 ${i === weeklyComparison.length - 1 ? 'bg-blue-50 dark:bg-blue-950/30 font-semibold' : ''}`}>
+                        <td className="py-3 px-3">
+                          <div className="font-medium">{w.week}</div>
+                          <div className="text-xs text-muted-foreground">{w.period}</div>
+                        </td>
+                        <td className="text-right py-3 px-3 font-mono">{w.google_leads}</td>
+                        <td className="text-right py-3 px-3 font-mono">{w.meta_leads}</td>
+                        <td className="text-right py-3 px-3 font-mono">{w.kolesa_leads}</td>
+                        <td className="text-right py-3 px-3 font-mono">{w.managers_leads}</td>
+                        <td className="text-right py-3 px-3 font-mono">{w.organic_leads}</td>
+                        <td className="text-right py-3 px-3 font-mono font-bold">{w.total_leads}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Leads Chart */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="text-base">Динамика заявок по неделям</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={350}>
+                <ComposedChart data={leadsChartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="week" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="Google Ads" fill={COLORS['Google Ads']} stackId="a" />
+                  <Bar dataKey="Meta Ads" fill={COLORS['Meta Ads']} stackId="a" />
+                  <Bar dataKey="Kolesa" fill={COLORS['Kolesa']} stackId="a" />
+                  <Bar dataKey="Менеджеры" fill={COLORS['Менеджеры']} stackId="a" />
+                  <Bar dataKey="Органика" fill={COLORS['Органика']} stackId="a" />
+                  <Line type="monotone" dataKey="Всего" stroke="#ef4444" strokeWidth={2} dot={{ r: 4 }} />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* Consents Comparison Table */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="text-base">Согласия по каналам (недели 1-6)</CardTitle>
+              <CardDescription>Количество подписанных согласий и CR (Заявки → Согласия)</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-3 px-2 font-medium">Неделя</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Google Ads']}}>Google Ads</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Meta Ads']}}>Meta Ads</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Kolesa']}}>Kolesa</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Менеджеры']}}>Менеджеры</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Органика']}}>Органика</th>
+                      <th className="text-right py-3 px-2 font-medium font-bold" colSpan={2}>Всего</th>
+                    </tr>
+                    <tr className="border-b text-xs text-muted-foreground">
+                      <th></th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {weeklyComparison.map((w, i) => (
+                      <tr key={i} className={`border-b hover:bg-muted/50 ${i === weeklyComparison.length - 1 ? 'bg-blue-50 dark:bg-blue-950/30 font-semibold' : ''}`}>
+                        <td className="py-2 px-2">
+                          <div className="font-medium text-xs">{w.week}</div>
+                          <div className="text-xs text-muted-foreground">{w.period}</div>
+                        </td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.google_consents}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.google_cr_consent}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.meta_consents}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.meta_cr_consent}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.kolesa_consents}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.kolesa_cr_consent}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.managers_consents}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.managers_cr_consent}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.organic_consents}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.organic_cr_consent}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs font-bold">{w.total_consents}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600 font-bold">{w.total_cr_consent}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* CR Consent Chart */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="text-base">Динамика CR Согласий по неделям (%)</CardTitle>
+              <CardDescription>Конверсия из заявок в согласия по каждому каналу</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={350}>
+                <LineChart data={crConsentChartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="week" />
+                  <YAxis unit="%" />
+                  <Tooltip formatter={(value: number) => `${value}%`} />
+                  <Legend />
+                  <Line type="monotone" dataKey="Google Ads" stroke={COLORS['Google Ads']} strokeWidth={2} dot={{ r: 3 }} />
+                  <Line type="monotone" dataKey="Meta Ads" stroke={COLORS['Meta Ads']} strokeWidth={2} dot={{ r: 3 }} />
+                  <Line type="monotone" dataKey="Kolesa" stroke={COLORS['Kolesa']} strokeWidth={2} dot={{ r: 3 }} />
+                  <Line type="monotone" dataKey="Менеджеры" stroke={COLORS['Менеджеры']} strokeWidth={2} dot={{ r: 3 }} />
+                  <Line type="monotone" dataKey="Органика" stroke={COLORS['Органика']} strokeWidth={2} dot={{ r: 3 }} />
+                  <Line type="monotone" dataKey="Среднее" stroke="#ef4444" strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3 }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* Approved Comparison Table */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="text-base">Одобрения по каналам (недели 1-6)</CardTitle>
+              <CardDescription>Количество одобренных заявок и CR (Согласия → Одобрения)</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-3 px-2 font-medium">Неделя</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Google Ads']}}>Google Ads</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Meta Ads']}}>Meta Ads</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Kolesa']}}>Kolesa</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Менеджеры']}}>Менеджеры</th>
+                      <th className="text-right py-3 px-2 font-medium" colSpan={2} style={{color: COLORS['Органика']}}>Органика</th>
+                      <th className="text-right py-3 px-2 font-medium font-bold" colSpan={2}>Всего</th>
+                    </tr>
+                    <tr className="border-b text-xs text-muted-foreground">
+                      <th></th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                      <th className="text-right py-1 px-2">#</th>
+                      <th className="text-right py-1 px-2">CR</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {weeklyComparison.map((w, i) => (
+                      <tr key={i} className={`border-b hover:bg-muted/50 ${i === weeklyComparison.length - 1 ? 'bg-blue-50 dark:bg-blue-950/30 font-semibold' : ''}`}>
+                        <td className="py-2 px-2">
+                          <div className="font-medium text-xs">{w.week}</div>
+                          <div className="text-xs text-muted-foreground">{w.period}</div>
+                        </td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.google_approved}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.google_cr_approved}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.meta_approved}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.meta_cr_approved}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.kolesa_approved}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.kolesa_cr_approved}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.managers_approved}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.managers_cr_approved}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs">{w.organic_approved}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600">{w.organic_cr_approved}%</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs font-bold">{w.total_approved}</td>
+                        <td className="text-right py-2 px-2 font-mono text-xs text-emerald-600 font-bold">{w.total_cr_approved}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Approved + CR Approved Charts */}
+          <div className="grid gap-6 md:grid-cols-2 mb-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Динамика одобрений по неделям</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <ComposedChart data={approvedChartData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="week" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Google Ads" fill={COLORS['Google Ads']} stackId="a" />
+                    <Bar dataKey="Meta Ads" fill={COLORS['Meta Ads']} stackId="a" />
+                    <Bar dataKey="Kolesa" fill={COLORS['Kolesa']} stackId="a" />
+                    <Bar dataKey="Менеджеры" fill={COLORS['Менеджеры']} stackId="a" />
+                    <Bar dataKey="Органика" fill={COLORS['Органика']} stackId="a" />
+                    <Line type="monotone" dataKey="Всего" stroke="#ef4444" strokeWidth={2} dot={{ r: 4 }} />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Динамика CR Одобрений (%)</CardTitle>
+                <CardDescription>Конверсия из согласий в одобрения</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={crApprovedChartData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="week" />
+                    <YAxis unit="%" />
+                    <Tooltip formatter={(value: number) => `${value}%`} />
+                    <Legend />
+                    <Line type="monotone" dataKey="Google Ads" stroke={COLORS['Google Ads']} strokeWidth={2} dot={{ r: 3 }} />
+                    <Line type="monotone" dataKey="Meta Ads" stroke={COLORS['Meta Ads']} strokeWidth={2} dot={{ r: 3 }} />
+                    <Line type="monotone" dataKey="Kolesa" stroke={COLORS['Kolesa']} strokeWidth={2} dot={{ r: 3 }} />
+                    <Line type="monotone" dataKey="Менеджеры" stroke={COLORS['Менеджеры']} strokeWidth={2} dot={{ r: 3 }} />
+                    <Line type="monotone" dataKey="Органика" stroke={COLORS['Органика']} strokeWidth={2} dot={{ r: 3 }} />
+                    <Line type="monotone" dataKey="Среднее" stroke="#ef4444" strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
         </section>
 
         {/* Approved Summary */}
