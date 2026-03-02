@@ -10,6 +10,7 @@ import Roadmap from "@/pages/Roadmap";
 import Analytics from "@/pages/Analytics";
 import AnalyticsJanuary from "@/pages/AnalyticsJanuary";
 import AnalyticsFebruary from "@/pages/AnalyticsFebruary";
+import AnalyticsFebruaryW9 from "@/pages/AnalyticsFebruaryW9";
 
 
 function Router() {
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/analytics" component={Analytics} />
       <Route path="/analytics-january" component={AnalyticsJanuary} />
       <Route path="/analytics-february" component={AnalyticsFebruary} />
+      <Route path="/analytics-february-w9" component={AnalyticsFebruaryW9} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
