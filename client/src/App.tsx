@@ -21,8 +21,8 @@ function Router() {
       <Route path="/roadmap" component={Roadmap} />
       <Route path="/analytics" component={Analytics} />
       <Route path="/analytics-january" component={AnalyticsJanuary} />
-      <Route path="/analytics-february" component={AnalyticsFebruary} />
       <Route path="/analytics-february-w9" component={AnalyticsFebruaryW9} />
+      <Route path="/analytics-february" component={AnalyticsFebruary} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
