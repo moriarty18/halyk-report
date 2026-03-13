@@ -147,17 +147,22 @@ const dealersWeekly = [
 
 // Дилеры по источникам — Неделя 10
 const dealerSources = [
-  { source: 'ANTO MOTORS', w7: 0, w8: 0, w9: 153, w10: 139, consents: 94, approved: 4 },
   { source: 'ИП Дилеры (квиз)', w7: 0, w8: 0, w9: 0, w10: 23, consents: 21, approved: 1 },
   { source: 'ASTANA MOTORS', w7: 3, w8: 5, w9: 6, w10: 9, consents: 8, approved: 2 },
-  { source: 'ALLUR (Jac, Skoda, Kia, Hongqi)', w7: 5, w8: 11, w9: 16, w10: 6, consents: 5, approved: 0 },
-  { source: 'ВИРАЖ', w7: 4, w8: 3, w9: 5, w10: 3, consents: 3, approved: 0 },
-  { source: 'NKB GROUP', w7: 2, w8: 6, w9: 6, w10: 3, consents: 3, approved: 0 },
+  { source: 'ALLUR (Jac, Skoda, Kia, Hongqi)', w7: 5, w8: 11, w9: 16, w10: 11, consents: 10, approved: 2 },
+  { source: 'ZOOMLION', w7: 0, w8: 2, w9: 1, w10: 7, consents: 4, approved: 2 },
+  { source: 'NKB GROUP', w7: 2, w8: 6, w9: 6, w10: 6, consents: 6, approved: 0 },
+  { source: 'AB MACHINERY (ALMATY BRANDS)', w7: 8, w8: 5, w9: 6, w10: 5, consents: 5, approved: 1 },
+  { source: 'BAIKONUR MACHINERY', w7: 0, w8: 0, w9: 0, w10: 4, consents: 4, approved: 1 },
+  { source: 'ВИРАЖ', w7: 4, w8: 3, w9: 5, w10: 4, consents: 3, approved: 0 },
+  { source: 'ПРОЧИЕ ПАРТНЁРЫ', w7: 0, w8: 0, w9: 0, w10: 5, consents: 5, approved: 0 },
   { source: 'AS-AY', w7: 6, w8: 5, w9: 3, w10: 3, consents: 3, approved: 0 },
-  { source: 'AB MACHINERY (ALMATY BRANDS)', w7: 8, w8: 5, w9: 6, w10: 2, consents: 2, approved: 0 },
-  { source: 'GLOBUS MACHINERY', w7: 0, w8: 0, w9: 3, w10: 1, consents: 1, approved: 0 },
-  { source: 'ZOOMLION', w7: 0, w8: 2, w9: 1, w10: 1, consents: 1, approved: 0 },
-  { source: 'SEVALO', w7: 1, w8: 1, w9: 1, w10: 1, consents: 1, approved: 0 },
+  { source: 'СпецАвто KAZAKHSTAN', w7: 0, w8: 0, w9: 0, w10: 3, consents: 1, approved: 0 },
+  { source: 'GLOBUS MACHINERY', w7: 0, w8: 0, w9: 3, w10: 2, consents: 1, approved: 0 },
+  { source: 'SEVALO', w7: 1, w8: 1, w9: 1, w10: 2, consents: 2, approved: 0 },
+  { source: 'Universal Machinery Group', w7: 0, w8: 0, w9: 0, w10: 2, consents: 2, approved: 0 },
+  { source: 'LI TRADE', w7: 0, w8: 0, w9: 0, w10: 2, consents: 0, approved: 0 },
+  { source: 'Прочие дилеры', w7: 0, w8: 0, w9: 0, w10: 6, consents: 6, approved: 4 },
 ];
 
 // Менеджеры — Неделя 10
@@ -453,15 +458,15 @@ export default function AnalyticsMarchW10() {
           <div className="grid gap-4 md:grid-cols-3 mb-4">
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">Всего заявок от дилеров</CardTitle></CardHeader>
-              <CardContent><div className="text-3xl font-bold">191</div><p className="text-xs text-muted-foreground mt-1">+113 vs нед. 9 (78)</p></CardContent>
+              <CardContent><div className="text-3xl font-bold">83</div><p className="text-xs text-muted-foreground mt-1">+5 vs нед. 9 (78)</p></CardContent>
             </Card>
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">Согласий от дилеров</CardTitle></CardHeader>
-              <CardContent><div className="text-3xl font-bold">142</div><p className="text-xs text-emerald-600 mt-1">CR 74.3%</p></CardContent>
+              <CardContent><div className="text-3xl font-bold">71</div><p className="text-xs text-emerald-600 mt-1">CR 85.5%</p></CardContent>
             </Card>
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">Одобрено от дилеров</CardTitle></CardHeader>
-              <CardContent><div className="text-3xl font-bold text-emerald-600">7</div><p className="text-xs text-muted-foreground mt-1">CR 4.9% от согласий</p></CardContent>
+              <CardContent><div className="text-3xl font-bold text-emerald-600">12</div><p className="text-xs text-muted-foreground mt-1">CR 16.9% от согласий</p></CardContent>
             </Card>
           </div>
           <Card>
@@ -497,9 +502,9 @@ export default function AnalyticsMarchW10() {
                       <td className="text-right py-2 px-3 font-mono">—</td>
                       <td className="text-right py-2 px-3 font-mono">—</td>
                       <td className="text-right py-2 px-3 font-mono">—</td>
-                      <td className="text-right py-2 px-3 font-mono">191</td>
-                      <td className="text-right py-2 px-3 font-mono text-emerald-600">142</td>
-                      <td className="text-right py-2 px-3 font-mono">7</td>
+                      <td className="text-right py-2 px-3 font-mono">83</td>
+                      <td className="text-right py-2 px-3 font-mono text-emerald-600">71</td>
+                      <td className="text-right py-2 px-3 font-mono">12</td>
                     </tr>
                   </tbody>
                 </table>
