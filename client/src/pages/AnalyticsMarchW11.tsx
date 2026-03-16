@@ -23,7 +23,7 @@ const weeklyComparison = [
   { week: 'Нед. 8',  period: '16-22 фев',     google: 89,  meta: 250, kolesa: 366, dealers: 89,  other: 44,  total: 838  },
   { week: 'Нед. 9',  period: '23 фев-1 мар',  google: 99,  meta: 311, kolesa: 415, dealers: 78,  other: 98,  total: 1001 },
   { week: 'Нед. 10', period: '2-8 мар',       google: 73,  meta: 124, kolesa: 362, dealers: 191, other: 7,   total: 757  },
-  { week: 'Нед. 11', period: '9-15 мар',      google: 130, meta: 309, kolesa: 405, dealers: 85,  other: 454, total: 993  },
+  { week: 'Нед. 11', period: '9-15 мар',      google: 130, meta: 309, kolesa: 405, dealers: 85,  other: 64,  total: 993  },
 ];
 
 const leadsChartData = weeklyComparison.map(w => ({
@@ -74,9 +74,9 @@ const channelTotals = [
   {
     channel: 'Остальные',
     impressions: null, clicks: null, ctr: null,
-    leads: 454, consents: 194, approved: 33,
+    leads: 64, consents: 49, approved: 24,
     cost: null,
-    note: 'без UTM (444) + zoomlion (7) + прочие (3)',
+    note: '993 − 130 − 309 − 405 − 85',
   },
 ];
 
@@ -124,7 +124,7 @@ const dealerSources = [
 
 // Итоги нед. 11 (после дедупл. по БИН)
 const totalLeads    = 993;   // 927 уник. БИН из CRM + 66 скриншот
-const totalConsents = 570;   // 417 (CRM дедупл.) + 160 (Kolesa) — пересечение учтено
+const totalConsents = 416;   // Google(59)+Meta(144)+Kolesa(160)+DealerUTM(13)+Other(49) — дедупл. по БИН
 const totalApproved = 51;    // из CRM экспорта (дедупл.)
 const totalSpend    = 768.83 + 297.20;
 const paidLeads     = 130 + 309; // Google + Meta (дедупл.)
@@ -144,7 +144,7 @@ const COLORS: Record<string, string> = {
 
 // Pie chart — структура заявок нед. 11
 const leadsPieData = [
-  { name: 'Остальные', value: 454, color: '#94a3b8' },
+  { name: 'Остальные', value: 64,  color: '#94a3b8' },
   { name: 'Kolesa DM', value: 405, color: '#ff6b35' },
   { name: 'Meta Ads',  value: 309, color: '#0668E1' },
   { name: 'Google Ads', value: 130, color: '#4285f4' },
