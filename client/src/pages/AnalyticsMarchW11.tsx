@@ -13,129 +13,134 @@ import { Link } from "wouter";
 
 // =============================================
 // ДАННЫЕ — НЕДЕЛЯ 11: 9–15 марта 2026
-// Дедупликация по БИН
-// Согласие = заполнена «Дата согласия» в CRM Excel
+// Источник данных: milan2_export_2026-03-09_2026-03-16
+// Согласие = consent_date заполнена в CRM
+// Kolesa DM = поле utm_source=kolesa-page (461 заявок из CRM Excel, Источник=Kolesa DM)
+// Поле «Источник» в CRM Excel = предмет лизинга, НЕ маркетинговый канал
 // =============================================
 
-// Исторические данные недель 7–11 для сравнения по заявкам
-// Примечание: согласия/одобрения за прошлые недели не показываем —
-// методология изменилась (теперь по Дате согласия из CRM, а не has_consent из UTM)
+// Исторические данные недель 7–11 — только заявки
+// (согласия/одобрения за прошлые недели не показываем — методология изменилась)
 const weeklyComparison = [
-  {
-    week: 'Нед. 7', period: '9-15 фев',
-    google_leads: 109, meta_leads: 136, kolesa_leads: 323,
-    dealers_leads: 72, other_leads: 44,
-    total_leads: 927,
-  },
-  {
-    week: 'Нед. 8', period: '16-22 фев',
-    google_leads: 89, meta_leads: 250, kolesa_leads: 366,
-    dealers_leads: 89, other_leads: 44,
-    total_leads: 1024,
-  },
-  {
-    week: 'Нед. 9', period: '23 фев-1 мар',
-    google_leads: 99, meta_leads: 311, kolesa_leads: 415,
-    dealers_leads: 78, other_leads: 98,
-    total_leads: 1057,
-  },
-  {
-    week: 'Нед. 10', period: '2-8 мар',
-    google_leads: 73, meta_leads: 124, kolesa_leads: 362,
-    dealers_leads: 191, other_leads: 7,
-    total_leads: 860,
-  },
-  {
-    week: 'Нед. 11', period: '9-15 мар',
-    google_leads: 118, meta_leads: 308, kolesa_leads: 16,
-    dealers_leads: 81, other_leads: 470,
-    total_leads: 993,
-  },
+  { week: 'Нед. 7', period: '9-15 фев',   google: 109, meta: 136, kolesa: 323, dealers: 72,  other: 44,  total: 927  },
+  { week: 'Нед. 8', period: '16-22 фев',  google: 89,  meta: 250, kolesa: 366, dealers: 89,  other: 44,  total: 1024 },
+  { week: 'Нед. 9', period: '23 фев-1 мар', google: 99, meta: 311, kolesa: 415, dealers: 78, other: 98,  total: 1057 },
+  { week: 'Нед. 10', period: '2-8 мар',   google: 73,  meta: 124, kolesa: 362, dealers: 191, other: 7,   total: 860  },
+  { week: 'Нед. 11', period: '9-15 мар',  google: 160, meta: 381, kolesa: 461, dealers: 101, other: 212, total: 1315 },
 ];
 
 const leadsChartData = weeklyComparison.map(w => ({
   week: w.week,
-  'Google Ads': w.google_leads,
-  'Meta Ads': w.meta_leads,
-  'Kolesa DM': w.kolesa_leads,
-  'Дилеры': w.dealers_leads,
-  'Остальные': w.other_leads,
+  'Google Ads': w.google,
+  'Meta Ads': w.meta,
+  'Kolesa DM': w.kolesa,
+  'Дилеры': w.dealers,
+  'Остальные': w.other,
 }));
 
 const totalLeadsChartData = weeklyComparison.map(w => ({
   week: w.week,
   period: w.period,
-  'Всего заявок': w.total_leads,
+  'Всего заявок': w.total,
 }));
 
-// ===== НЕДЕЛЯ 11 — основные данные =====
-
-// Воронка по каналам
+// ===== ВОРОНКА ПО КАНАЛАМ — НЕДЕЛЯ 11 =====
+// Данные строго из CRM экспорта (milan2), без дедупликации по БИН между источниками
 const channelTotals = [
-  { channel: 'Google Ads', impressions: 11038, clicks: 1908, leads: 118, consents: 56, approved: 7, cost: 768.83, ctr: 17.29 },
-  { channel: 'Meta Ads', impressions: 59351, clicks: 1635, leads: 308, consents: 151, approved: 11, cost: 297.20, ctr: 2.75 },
-  { channel: 'Kolesa DM', impressions: null, clicks: null, leads: 16, consents: 8, approved: 0, cost: null, ctr: null },
-  { channel: 'Дилеры', impressions: null, clicks: null, leads: 81, consents: null, approved: null, cost: null, ctr: null },
-  { channel: 'Остальные', impressions: null, clicks: null, leads: 470, consents: 220, approved: 38, cost: null, ctr: null },
+  {
+    channel: 'Google Ads',
+    impressions: 11038, clicks: 1908, ctr: 17.29,
+    leads: 160, consents: 67, approved: 7,
+    cost: 768.83,
+  },
+  {
+    channel: 'Meta Ads',
+    impressions: 59351, clicks: 1635, ctr: 2.75,
+    leads: 381, consents: 163, approved: 12,
+    cost: 297.20,
+  },
+  {
+    channel: 'Kolesa DM',
+    impressions: null, clicks: null, ctr: null,
+    leads: 461, consents: 184, approved: null,
+    cost: null,
+  },
+  {
+    channel: 'Дилеры',
+    impressions: null, clicks: null, ctr: null,
+    leads: 101, consents: null, approved: null,
+    cost: null,
+  },
+  {
+    channel: 'Остальные',
+    impressions: null, clicks: null, ctr: null,
+    leads: 723, consents: 303, approved: 40,
+    cost: null,
+  },
 ];
 
 // Google Ads — кампании неделя 11
 const googleAdsCampaigns = [
-  { campaign: 'Общие ключевые слова', impressions: 7162, clicks: 1392, conversions: 122.77, cost: 558.21, ctr: 19.44, cr: 8.82 },
-  { campaign: 'Строительство', impressions: 1635, clicks: 216, conversions: 12.33, cost: 83.63, ctr: 13.21, cr: 5.71 },
-  { campaign: 'Такси / Автобусы', impressions: 903, clicks: 97, conversions: 5.16, cost: 43.13, ctr: 10.74, cr: 5.32 },
-  { campaign: 'Сельское хозяйство', impressions: 505, clicks: 82, conversions: 5.00, cost: 32.82, ctr: 16.24, cr: 6.10 },
-  { campaign: 'Дистрибуция и ритейл', impressions: 428, clicks: 55, conversions: 4.65, cost: 26.04, ctr: 12.85, cr: 8.45 },
-  { campaign: 'Грузоперевозки', impressions: 273, clicks: 47, conversions: 5.00, cost: 19.00, ctr: 17.22, cr: 10.64 },
-  { campaign: 'ГМК и нефтедобыча', impressions: 132, clicks: 19, conversions: 3.00, cost: 6.00, ctr: 14.39, cr: 15.79 },
+  { campaign: 'Общие ключевые слова',     impressions: 7162, clicks: 1392, conversions: 122.77, cost: 558.21, ctr: 19.44, cr: 8.82 },
+  { campaign: 'Строительство',            impressions: 1635, clicks: 216,  conversions: 12.33,  cost: 83.63,  ctr: 13.21, cr: 5.71 },
+  { campaign: 'Такси / Автобусы',         impressions: 903,  clicks: 97,   conversions: 5.16,   cost: 43.13,  ctr: 10.74, cr: 5.32 },
+  { campaign: 'Сельское хозяйство',       impressions: 505,  clicks: 82,   conversions: 5.00,   cost: 32.82,  ctr: 16.24, cr: 6.10 },
+  { campaign: 'Дистрибуция и ритейл',     impressions: 428,  clicks: 55,   conversions: 4.65,   cost: 26.04,  ctr: 12.85, cr: 8.45 },
+  { campaign: 'Грузоперевозки',           impressions: 273,  clicks: 47,   conversions: 5.00,   cost: 19.00,  ctr: 17.22, cr: 10.64 },
+  { campaign: 'ГМК и нефтедобыча',        impressions: 132,  clicks: 19,   conversions: 3.00,   cost: 6.00,   ctr: 14.39, cr: 15.79 },
 ];
 
 // Google Ads — динамика нед. 8–11
 const googleAdsWeekly = [
-  { week: 'Нед. 8', period: '16-22 фев', impressions: 8498, clicks: 1738, leads: 89, cost: 726.61, ctr: 20.45 },
-  { week: 'Нед. 9', period: '23 фев-1 мар', impressions: 10299, clicks: 1855, leads: 99, cost: 745.55, ctr: 18.01 },
-  { week: 'Нед. 10', period: '2-8 мар', impressions: 7651, clicks: 1561, leads: 73, cost: 664.16, ctr: 20.40 },
-  { week: 'Нед. 11', period: '9-15 мар', impressions: 11038, clicks: 1908, leads: 118, cost: 768.83, ctr: 17.29 },
+  { week: 'Нед. 8', impressions: 8498,  clicks: 1738, leads: 89,  cost: 726.61, ctr: 20.45 },
+  { week: 'Нед. 9', impressions: 10299, clicks: 1855, leads: 99,  cost: 745.55, ctr: 18.01 },
+  { week: 'Нед. 10', impressions: 7651, clicks: 1561, leads: 73,  cost: 664.16, ctr: 20.40 },
+  { week: 'Нед. 11', impressions: 11038, clicks: 1908, leads: 160, cost: 768.83, ctr: 17.29 },
 ];
 
 // Meta Ads — динамика нед. 8–11
 const metaAdsWeekly = [
-  { week: 'Нед. 8', period: '16-22 фев', impressions: 63498, reach: 30842, leads: 250, cost: 256.65 },
-  { week: 'Нед. 9', period: '23 фев-1 мар', impressions: 69107, reach: 34961, leads: 311, cost: 301.25 },
-  { week: 'Нед. 10', period: '2-8 мар', impressions: 61034, reach: 31689, leads: 124, cost: 294.38 },
-  { week: 'Нед. 11', period: '9-15 мар', impressions: 59351, reach: 31365, leads: 308, cost: 297.20 },
+  { week: 'Нед. 8',  impressions: 63498, reach: 30842, leads: 250, cost: 256.65 },
+  { week: 'Нед. 9',  impressions: 69107, reach: 34961, leads: 311, cost: 301.25 },
+  { week: 'Нед. 10', impressions: 61034, reach: 31689, leads: 124, cost: 294.38 },
+  { week: 'Нед. 11', impressions: 59351, reach: 31365, leads: 381, cost: 297.20 },
 ];
 
 // Дилеры — скриншот дилерской системы (10–13 марта)
 const dealerSources = [
-  { source: 'ТОО «BAIKONUR MACHINERY COMPANY»', w11: 18 },
-  { source: 'Халык-Банк, органика', w11: 16 },
-  { source: 'ТОО «ZOOMLION Central Asia»', w11: 13 },
-  { source: 'ТОО «Компания Ас-Ай ЛТД»', w11: 6 },
-  { source: 'ТОО «КАЗПРОФИГРУПП»', w11: 3 },
-  { source: 'ТОО «NKB GROUP KAZAKHSTAN»', w11: 3 },
-  { source: 'ТОО «СиноТехМаш»', w11: 2 },
-  { source: 'ТОО «HYUNDAI» Коммерческий Центр', w11: 2 },
-  { source: 'ТОО «NKB Group Spectehnika»', w11: 1 },
-  { source: 'АО «Халык-Лизинг»', w11: 1 },
-  { source: 'ТОО «TRUCK AUTO SERVICE»', w11: 1 },
+  { source: 'ТОО «BAIKONUR MACHINERY COMPANY»',         w11: 18 },
+  { source: 'Халык-Банк, органика',                      w11: 16 },
+  { source: 'ТОО «ZOOMLION Central Asia»',               w11: 13 },
+  { source: 'ТОО «Компания Ас-Ай ЛТД»',                 w11: 6  },
+  { source: 'ТОО «КАЗПРОФИГРУПП»',                       w11: 3  },
+  { source: 'ТОО «NKB GROUP KAZAKHSTAN»',                w11: 3  },
+  { source: 'ТОО «СиноТехМаш»',                          w11: 2  },
+  { source: 'ТОО «HYUNDAI» Коммерческий Центр',          w11: 2  },
+  { source: 'ТОО «NKB Group Spectehnika»',               w11: 1  },
+  { source: 'АО «Халык-Лизинг»',                         w11: 1  },
+  { source: 'ТОО «TRUCK AUTO SERVICE»',                  w11: 1  },
 ];
 
 // Pie chart — структура заявок нед. 11
 const leadsPieData = [
-  { name: 'Meta Ads', value: 308, color: '#0668E1' },
-  { name: 'Остальные', value: 470, color: '#94a3b8' },
-  { name: 'Google Ads', value: 118, color: '#4285f4' },
-  { name: 'Дилеры', value: 81, color: '#f59e0b' },
-  { name: 'Kolesa DM', value: 16, color: '#ff6b35' },
+  { name: 'Остальные', value: 723, color: '#94a3b8' },
+  { name: 'Kolesa DM', value: 461, color: '#ff6b35' },
+  { name: 'Meta Ads',  value: 381, color: '#0668E1' },
+  { name: 'Google Ads', value: 160, color: '#4285f4' },
+  { name: 'Дилеры',   value: 101, color: '#f59e0b' },
 ];
 
 // Итоги нед. 11
-const totalLeads = 993;
-const totalConsents = 435; // Google 56 + Meta 151 + Kolesa 8 + Дилеры (UTM dealer 11) + Остальные 220 = 446 (по UTM dealer части)
-const totalApproved = 56; // Google 7 + Meta 11 + Остальные 38
+const totalLeads = 1315;  // все строки в экспорте (без дедупл. между источниками)
+const totalConsents = 561; // consent_date заполнена в новом экспорте
+const totalApproved = 61;
 const totalSpend = 768.83 + 297.20;
-const paidLeads = 118 + 308; // Google + Meta
+const paidLeads = 160 + 381; // Google + Meta
+
+// Дельта vs неделя 10
+const w10_total = 860;
+const deltaLeads = totalLeads - w10_total;
+const deltaSpend = totalSpend - (664.16 + 294.38);
 
 // Цвета
 const COLORS: Record<string, string> = {
@@ -145,12 +150,6 @@ const COLORS: Record<string, string> = {
   'Дилеры': '#f59e0b',
   'Остальные': '#94a3b8',
 };
-
-// Дельта vs неделя 10
-const w10_total = 860;
-const w10_consents = 614; // по старой методологии — не сравниваем
-const deltaLeads = totalLeads - w10_total;
-const deltaSpend = totalSpend - (664.16 + 294.38);
 
 export default function AnalyticsMarchW11() {
   return (
@@ -190,7 +189,7 @@ export default function AnalyticsMarchW11() {
             </div>
             <div>
               <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl">Воронка продаж — Неделя 11</h1>
-              <p className="text-muted-foreground mt-1">9 – 15 марта 2026 | Дедупликация по БИН | Согласие по «Дате согласия» в CRM</p>
+              <p className="text-muted-foreground mt-1">9 – 15 марта 2026 | Согласие по «consent_date» в CRM</p>
             </div>
           </div>
           <div className="flex gap-2 flex-wrap">
@@ -224,9 +223,9 @@ export default function AnalyticsMarchW11() {
                 <CardTitle className="text-sm font-medium text-muted-foreground">Согласий</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">446</div>
+                <div className="text-3xl font-bold">{totalConsents}</div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  CR {(446 / (totalLeads - 81) * 100).toFixed(1)}% (без дилеров скриншот)
+                  CR {(totalConsents / totalLeads * 100).toFixed(1)}% от заявок
                 </p>
               </CardContent>
             </Card>
@@ -237,7 +236,7 @@ export default function AnalyticsMarchW11() {
               <CardContent>
                 <div className="text-3xl font-bold text-emerald-600">{totalApproved}</div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  CR {(totalApproved / 446 * 100).toFixed(1)}% от согласий
+                  CR {(totalApproved / totalConsents * 100).toFixed(1)}% от согласий
                 </p>
               </CardContent>
             </Card>
@@ -249,7 +248,7 @@ export default function AnalyticsMarchW11() {
                 <div className="text-3xl font-bold">${totalSpend.toFixed(2)}</div>
                 <p className={`text-xs mt-1 flex items-center gap-1 ${deltaSpend >= 0 ? 'text-red-500' : 'text-emerald-600'}`}>
                   {deltaSpend >= 0 ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
-                  {deltaSpend >= 0 ? '+' : ''}${deltaSpend.toFixed(2)} vs нед. 10
+                  {deltaSpend >= 0 ? '+' : ''}${Math.abs(deltaSpend).toFixed(2)} vs нед. 10
                 </p>
               </CardContent>
             </Card>
@@ -283,26 +282,26 @@ export default function AnalyticsMarchW11() {
                       <th className="text-right py-3 px-2 font-medium">Согласия</th>
                       <th className="text-right py-3 px-2 font-medium">CR Заявка→Согласие</th>
                       <th className="text-right py-3 px-2 font-medium">Одобрено</th>
-                      <th className="text-right py-3 px-2 font-medium">CR Согласие→Одобрение</th>
+                      <th className="text-right py-3 px-2 font-medium">CR Согл.→Одобр.</th>
                       <th className="text-right py-3 px-2 font-medium">Расход</th>
                       <th className="text-right py-3 px-2 font-medium">CPL</th>
                     </tr>
                   </thead>
                   <tbody>
                     {channelTotals.map((ch, i) => {
-                      const hasImpr = ch.impressions !== null && ch.impressions !== undefined;
-                      const hasClicks = ch.clicks !== null && ch.clicks !== undefined;
+                      const hasImpr = ch.impressions != null;
+                      const hasClicks = ch.clicks != null;
                       const ctr = hasImpr && hasClicks ? (ch.clicks! / ch.impressions! * 100).toFixed(2) : null;
                       const crLead = hasClicks ? (ch.leads / ch.clicks! * 100).toFixed(2) : null;
-                      const crConsent = ch.consents !== null && ch.leads > 0 ? (ch.consents! / ch.leads * 100).toFixed(1) : null;
-                      const crApproved = ch.approved !== null && ch.consents !== null && ch.consents! > 0 ? (ch.approved! / ch.consents! * 100).toFixed(1) : null;
+                      const crConsent = ch.consents != null ? (ch.consents / ch.leads * 100).toFixed(1) : null;
+                      const crApproved = ch.approved != null && ch.consents != null ? (ch.approved / ch.consents * 100).toFixed(1) : null;
                       const cpl = ch.cost ? (ch.cost / ch.leads).toFixed(2) : null;
                       return (
                         <tr key={i} className="border-b hover:bg-muted/50">
                           <td className="py-3 px-2">
                             <div className="flex items-center gap-2">
                               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[ch.channel] || '#94a3b8' }}></div>
-                              {ch.channel}
+                              <span className="font-medium">{ch.channel}</span>
                             </div>
                           </td>
                           <td className="text-right py-3 px-2 font-mono">{hasImpr ? ch.impressions!.toLocaleString() : '—'}</td>
@@ -310,9 +309,9 @@ export default function AnalyticsMarchW11() {
                           <td className="text-right py-3 px-2 font-mono text-blue-600">{ctr ? `${ctr}%` : '—'}</td>
                           <td className="text-right py-3 px-2 font-mono font-semibold">{ch.leads.toLocaleString()}</td>
                           <td className="text-right py-3 px-2 font-mono text-blue-600">{crLead ? `${crLead}%` : '—'}</td>
-                          <td className="text-right py-3 px-2 font-mono">{ch.consents !== null ? ch.consents : '—'}</td>
+                          <td className="text-right py-3 px-2 font-mono">{ch.consents != null ? ch.consents : '—'}</td>
                           <td className="text-right py-3 px-2 font-mono text-emerald-600">{crConsent ? `${crConsent}%` : '—'}</td>
-                          <td className="text-right py-3 px-2 font-mono">{ch.approved !== null ? ch.approved : '—'}</td>
+                          <td className="text-right py-3 px-2 font-mono">{ch.approved != null ? ch.approved : '—'}</td>
                           <td className="text-right py-3 px-2 font-mono text-emerald-600">{crApproved ? `${crApproved}%` : '—'}</td>
                           <td className="text-right py-3 px-2 font-mono">{ch.cost ? `$${ch.cost.toFixed(2)}` : '—'}</td>
                           <td className="text-right py-3 px-2 font-mono">{cpl ? `$${cpl}` : '—'}</td>
@@ -323,32 +322,34 @@ export default function AnalyticsMarchW11() {
                       <td className="py-3 px-2">ИТОГО</td>
                       <td className="text-right py-3 px-2 font-mono">70,389</td>
                       <td className="text-right py-3 px-2 font-mono">3,543</td>
-                      <td className="text-right py-3 px-2 font-mono text-blue-600">—</td>
+                      <td className="text-right py-3 px-2 font-mono">—</td>
                       <td className="text-right py-3 px-2 font-mono">{totalLeads.toLocaleString()}</td>
-                      <td className="text-right py-3 px-2 font-mono text-blue-600">—</td>
-                      <td className="text-right py-3 px-2 font-mono">446*</td>
-                      <td className="text-right py-3 px-2 font-mono text-emerald-600">—</td>
+                      <td className="text-right py-3 px-2 font-mono">—</td>
+                      <td className="text-right py-3 px-2 font-mono">{totalConsents}</td>
+                      <td className="text-right py-3 px-2 font-mono text-emerald-600">{(totalConsents / totalLeads * 100).toFixed(1)}%</td>
                       <td className="text-right py-3 px-2 font-mono">{totalApproved}</td>
-                      <td className="text-right py-3 px-2 font-mono text-emerald-600">—</td>
+                      <td className="text-right py-3 px-2 font-mono text-emerald-600">{(totalApproved / totalConsents * 100).toFixed(1)}%</td>
                       <td className="text-right py-3 px-2 font-mono">${totalSpend.toFixed(2)}</td>
                       <td className="text-right py-3 px-2 font-mono">${(totalSpend / paidLeads).toFixed(2)}</td>
                     </tr>
                   </tbody>
                 </table>
-                <p className="text-xs text-muted-foreground mt-2 px-2">* Согласия по каналу «Дилеры» (скриншот) не отслеживаются — данные недоступны</p>
+                <p className="text-xs text-muted-foreground mt-2 px-2">
+                  * Согласия по «Дилерам» (скриншот) и одобрения по «Kolesa DM» не отслеживаются — данные недоступны
+                </p>
               </div>
             </CardContent>
           </Card>
         </section>
 
-        {/* Структура заявок — Pie + Bar */}
+        {/* Структура заявок */}
         <section>
           <h2 className="text-xl font-semibold mb-4">Структура заявок — Неделя 11</h2>
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader><CardTitle className="text-base">Доля каналов в заявках</CardTitle></CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={280}>
+                <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
                     <Pie
                       data={leadsPieData}
@@ -371,7 +372,7 @@ export default function AnalyticsMarchW11() {
             <Card>
               <CardHeader><CardTitle className="text-base">Заявки по каналам (нед. 7–11)</CardTitle></CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={280}>
+                <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={leadsChartData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="week" />
@@ -379,10 +380,10 @@ export default function AnalyticsMarchW11() {
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="Google Ads" stackId="a" fill={COLORS['Google Ads']} />
-                    <Bar dataKey="Meta Ads" stackId="a" fill={COLORS['Meta Ads']} />
-                    <Bar dataKey="Kolesa DM" stackId="a" fill={COLORS['Kolesa DM']} />
-                    <Bar dataKey="Дилеры" stackId="a" fill={COLORS['Дилеры']} />
-                    <Bar dataKey="Остальные" stackId="a" fill={COLORS['Остальные']} />
+                    <Bar dataKey="Meta Ads"   stackId="a" fill={COLORS['Meta Ads']} />
+                    <Bar dataKey="Kolesa DM"  stackId="a" fill={COLORS['Kolesa DM']} />
+                    <Bar dataKey="Дилеры"     stackId="a" fill={COLORS['Дилеры']} />
+                    <Bar dataKey="Остальные"  stackId="a" fill={COLORS['Остальные']} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -395,11 +396,11 @@ export default function AnalyticsMarchW11() {
           <h2 className="text-xl font-semibold mb-4">Динамика заявок (нед. 7–11)</h2>
           <Card>
             <CardContent className="pt-6">
-              <ResponsiveContainer width="100%" height={280}>
+              <ResponsiveContainer width="100%" height={260}>
                 <LineChart data={totalLeadsChartData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="week" />
-                  <YAxis domain={[700, 1200]} />
+                  <YAxis domain={[700, 1400]} />
                   <Tooltip formatter={(value: number) => [`${value} заявок`, 'Всего']} />
                   <Legend />
                   <Line
@@ -423,8 +424,8 @@ export default function AnalyticsMarchW11() {
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">Всего заявок от дилеров</CardTitle></CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">81</div>
-                <p className="text-xs text-muted-foreground mt-1">ИП через квиз: 15 + скриншот: 66</p>
+                <div className="text-3xl font-bold">101</div>
+                <p className="text-xs text-muted-foreground mt-1">ИП через квиз: 35 + скриншот: 66</p>
               </CardContent>
             </Card>
             <Card>
@@ -437,8 +438,8 @@ export default function AnalyticsMarchW11() {
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">ИП через квиз (utm=dealer)</CardTitle></CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">15</div>
-                <p className="text-xs text-muted-foreground mt-1">Согласий: 11 | CR 73.3%</p>
+                <div className="text-3xl font-bold">35</div>
+                <p className="text-xs text-muted-foreground mt-1">Согласий: 21 | CR 60.0%</p>
               </CardContent>
             </Card>
           </div>
@@ -456,7 +457,7 @@ export default function AnalyticsMarchW11() {
                   <tbody>
                     {dealerSources.map((d, i) => (
                       <tr key={i} className="border-b hover:bg-muted/50">
-                        <td className="py-2 px-3 font-medium">{d.source}</td>
+                        <td className="py-2 px-3">{d.source}</td>
                         <td className="text-right py-2 px-3 font-mono font-bold">{d.w11}</td>
                       </tr>
                     ))}
@@ -479,7 +480,7 @@ export default function AnalyticsMarchW11() {
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">Показы</CardTitle></CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">11,038</div>
-                <p className="text-xs text-emerald-600 mt-1">+3,387 vs нед. 10</p>
+                <p className="text-xs text-emerald-600 mt-1">+3,387 vs нед. 10 (+44%)</p>
               </CardContent>
             </Card>
             <Card>
@@ -493,13 +494,13 @@ export default function AnalyticsMarchW11() {
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">Расход</CardTitle></CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">$768.83</div>
-                <p className="text-xs text-muted-foreground mt-1">CPL $6.52</p>
+                <p className="text-xs text-muted-foreground mt-1">CPL $4.81</p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">Конверсии (GA)</CardTitle></CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">157.9</div>
+                <div className="text-2xl font-bold">157.91</div>
                 <p className="text-xs text-muted-foreground mt-1">CR 8.27%</p>
               </CardContent>
             </Card>
@@ -557,8 +558,8 @@ export default function AnalyticsMarchW11() {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="leads" name="Заявки (CRM)" fill={COLORS['Google Ads']} />
-                    <Bar dataKey="clicks" name="Клики" fill="#93c5fd" />
+                    <Bar dataKey="leads"  name="Заявки (CRM)" fill={COLORS['Google Ads']} />
+                    <Bar dataKey="clicks" name="Клики"         fill="#93c5fd" />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -587,7 +588,7 @@ export default function AnalyticsMarchW11() {
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">Расход</CardTitle></CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">$297.20</div>
-                <p className="text-xs text-muted-foreground mt-1">CPL $0.96</p>
+                <p className="text-xs text-muted-foreground mt-1">CPL $0.78</p>
               </CardContent>
             </Card>
             <Card>
@@ -609,9 +610,6 @@ export default function AnalyticsMarchW11() {
                   <Tooltip />
                   <Legend />
                   <Bar dataKey="leads" name="Заявки (CRM)" fill={COLORS['Meta Ads']} />
-                  <Bar dataKey="reach" name="Охват / 100" fill="#93c5fd"
-                    // Нормализуем охват для визуализации
-                  />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -629,14 +627,15 @@ export default function AnalyticsMarchW11() {
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground space-y-2">
               <p>• Период: Неделя 11 — 9–15 марта 2026</p>
-              <p>• <strong>Дедупликация по БИН</strong> — учитываются уникальные компании (993 уникальных из 1,315 исходных)</p>
-              <p>• <strong>Согласие</strong> — определяется по наличию заполненной «Даты согласия» в CRM Excel (новая методология). Поле has_consent в UTM не используется.</p>
-              <p>• <strong>Google Ads:</strong> 7 активных кампаний. Показы +44% vs нед. 10. Расход $768.83. CTR 17.29%.</p>
-              <p>• <strong>Meta Ads:</strong> Охват 31,365 | Показы 59,351 | Клики по ссылке 1,635 | Расход $297.20</p>
-              <p>• <strong>Kolesa DM:</strong> 16 заявок через UTM (kolesa-page). Основной поток Kolesa приходит без UTM меток — не отслеживается.</p>
-              <p>• <strong>Дилеры:</strong> 15 заявок через квиз (utm_source=dealer) + 66 заявок из дилерской системы (скриншот, 10–13 марта). Итого 81.</p>
-              <p>• <strong>Остальные:</strong> 470 заявок — преимущественно без UTM меток (444 из 470). Требует настройки сквозной аналитики.</p>
-              <p>• <strong>Одобрение:</strong> approval_status = APPROVED в UTM таблице.</p>
+              <p>• <strong>Источник данных:</strong> milan2_export_2026-03-09_2026-03-16 (1,315 строк)</p>
+              <p>• <strong>Согласие</strong> — определяется по наличию заполненного поля <code>consent_date</code> в CRM экспорте. Итого: 561 согласие.</p>
+              <p>• <strong>Поле «Источник» в CRM Excel</strong> — это предмет лизинга (от какого дилера техника), а не маркетинговый канал. В статистику не включается.</p>
+              <p>• <strong>Google Ads:</strong> utm_source=google | 160 заявок | 67 согласий | 7 одобрено | Расход $768.83</p>
+              <p>• <strong>Meta Ads:</strong> utm_source=meta+ig | 381 заявок (meta: 377, ig: 4) | 163 согласия | 12 одобрено | Расход $297.20</p>
+              <p>• <strong>Kolesa DM:</strong> 461 заявок (поле Источник=Kolesa DM в CRM Excel) | 184 согласия | CR 39.9%</p>
+              <p>• <strong>Дилеры:</strong> utm_source=dealer (35 ИП через квиз) + 66 из скриншота дилерской системы = 101 заявка</p>
+              <p>• <strong>Остальные:</strong> 723 заявки без UTM меток (710) + zoomlion (10) + online_bank (2) + whatsapp (1)</p>
+              <p>• <strong>Одобрение:</strong> approval_status = APPROVED | Итого: 61 одобрение</p>
             </CardContent>
           </Card>
         </section>
