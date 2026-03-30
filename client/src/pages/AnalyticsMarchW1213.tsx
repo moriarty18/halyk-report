@@ -63,9 +63,9 @@ const channelTotals = [
   {
     channel: 'Kolesa DM',
     impressions: null, clicks: null, ctr: null,
-    leads: 709, consents: 212, approved: null,
+    leads: 709, consents: 212, approved: 19,
     cost: null,
-    note: 'Партнерский источник (45.6% уникальных заявок)',
+    note: 'Партнерский источник (45.6% уникальных заявок, 811 всего)',
   },
   {
     channel: 'Zoomlion',
@@ -352,7 +352,7 @@ export default function AnalyticsMarchW1213() {
                 <li>• <strong>Дедупликация:</strong> По БИН/ИИН, уникальные заявки: 1,555 (вместо 2,399)</li>
                 <li>• <strong>Согласия:</strong> CRM поле МЕТОДИКА не пусто (558 = 35.9% от уникальных)</li>
                 <li>• <strong>Одобрено:</strong> UTM approval_status = APPROVED (39 = 7.0% от согласий)</li>
-                <li>• <strong>Kolesa DM:</strong> 709 уникальных заявок (45.6%), согласия: 212 (29.9%)</li>
+                <li>• <strong>Kolesa DM:</strong> 709 уникальных заявок (45.6%), согласия: 212 (29.9%), одобрено: 19 (9.0%)</li>
                 <li>• <strong>Zoomlion:</strong> 27 уникальных заявок, маркетинговые активности (пуши + баннеры)</li>
                 <li>• <strong>Период:</strong> 16-29 марта 2026</li>
               </ul>
