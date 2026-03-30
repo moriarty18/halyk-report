@@ -63,9 +63,9 @@ const channelTotals = [
   {
     channel: 'Kolesa DM',
     impressions: null, clicks: null, ctr: null,
-    leads: 709, consents: 212, approved: 19,
+    leads: 709, consents: 212, approved: null,
     cost: null,
-    note: 'Партнерский источник (45.6% уникальных заявок, 811 всего)',
+    note: 'Партнерский источник (45.6% уникальных заявок)',
   },
   {
     channel: 'Zoomlion',
@@ -84,7 +84,7 @@ const channelTotals = [
   {
     channel: 'Остальные',
     impressions: null, clicks: null, ctr: null,
-    leads: 528, consents: 0, approved: 0,
+    leads: 59, consents: 13, approved: 0,
     cost: null,
     note: 'Kolesa Page, Online Bank, Instagram, WhatsApp, Push',
   },
@@ -133,11 +133,11 @@ const zoomlionFunnel = [
 
 // Согласия по каналам (CRM методика)
 const consentsByChannel = [
-  { channel: 'Google', consents: 80, leads: 313, rate: 25.6 },
-  { channel: 'Meta', consents: 257, leads: 648, rate: 39.7 },
-  { channel: 'Zoomlion', consents: 11, leads: 45, rate: 24.4 },
-  { channel: 'Дилеры', consents: 31, leads: 53, rate: 58.5 },
-  { channel: 'Kolesa DM', consents: 811, leads: 811, rate: 100.0 },
+  { channel: 'Google', consents: 75, leads: 210, rate: 35.7 },
+  { channel: 'Meta', consents: 220, leads: 513, rate: 42.9 },
+  { channel: 'Zoomlion', consents: 10, leads: 27, rate: 37.0 },
+  { channel: 'Дилеры', consents: 28, leads: 37, rate: 75.7 },
+  { channel: 'Kolesa DM', consents: 212, leads: 709, rate: 29.9 },
 ];
 
 export default function AnalyticsMarchW1213() {
@@ -186,7 +186,7 @@ export default function AnalyticsMarchW1213() {
               <div>
                 <p className="text-sm text-muted-foreground">Согласия (CRM)</p>
                 <p className="text-3xl font-bold mt-2">{totalConsents.toLocaleString()}</p>
-                <p className="text-xs text-green-600 mt-1">34.9% CR</p>
+                <p className="text-xs text-green-600 mt-1">35.9% CR</p>
               </div>
               <Badge className="bg-green-600">✓</Badge>
             </div>
@@ -197,7 +197,7 @@ export default function AnalyticsMarchW1213() {
               <div>
                 <p className="text-sm text-muted-foreground">Одобрено</p>
                 <p className="text-3xl font-bold mt-2">{totalApproved.toLocaleString()}</p>
-                <p className="text-xs text-muted-foreground mt-1">4.9% от всех</p>
+                <p className="text-xs text-muted-foreground mt-1">7.0% от согласий</p>
               </div>
               <Badge className="bg-purple-600">✓✓</Badge>
             </div>
@@ -349,11 +349,11 @@ export default function AnalyticsMarchW1213() {
             <div>
               <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Методология</h3>
               <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
-                <li>• <strong>Дедупликация:</strong> По БИН/ИИН, уникальные заявки: 1,555 (вместо 2,399)</li>
-                <li>• <strong>Согласия:</strong> CRM поле МЕТОДИКА не пусто (558 = 35.9% от уникальных)</li>
+                <li>• <strong>Дедупликация:</strong> По БИН/ИИН, уникальные заявки: 1,555</li>
+                <li>• <strong>Согласия:</strong> CRM поле МЕТОДИКА не пусто (558 = 35.9%)</li>
                 <li>• <strong>Одобрено:</strong> UTM approval_status = APPROVED (39 = 7.0% от согласий)</li>
-                <li>• <strong>Kolesa DM:</strong> 709 уникальных заявок (45.6%), согласия: 212 (29.9%), одобрено: 19 (9.0%)</li>
-                <li>• <strong>Zoomlion:</strong> 27 уникальных заявок, маркетинговые активности (пуши + баннеры)</li>
+                <li>• <strong>Kolesa DM:</strong> 709 уникальных (29.9% согласий)</li>
+                <li>• <strong>Zoomlion:</strong> 27 уникальных заявок</li>
                 <li>• <strong>Период:</strong> 16-29 марта 2026</li>
               </ul>
             </div>
