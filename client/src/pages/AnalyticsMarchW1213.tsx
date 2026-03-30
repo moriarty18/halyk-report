@@ -11,19 +11,23 @@ import { Link } from "wouter";
 // =============================================
 // ДАННЫЕ — НЕДЕЛЯ 12-13: 16–29 марта 2026
 // Источник: UTM файл (16.03-29.03.csv) + CRM (Обработка заявок)
-// Согласие: CRM МЕТОДИКА не пусто (837 = 34.9%)
-// Одобрено: UTM approval_status = APPROVED (117 = 4.9%)
+// Дедупликация: по БИН/ИИН (приоритет: первое появление)
+// Согласие: CRM МЕТОДИКА не пусто (558 = 35.9% от уникальных)
+// Одобрено: UTM approval_status = APPROVED (39 = 7.0% от согласий)
+// Уникальные заявки: 1,555 (вместо 2,399)
 // =============================================
 
-// Исторические данные (заявки по неделям)
+// Исторические данные (заявки по неделям - БЕЗ дедупликации)
 const weeklyComparison = [
   { week: 'Нед. 7',  period: '9-15 фев',      google: 109, meta: 136, kolesa: 323, dealers: 72,  other: 44,  total: 684  },
   { week: 'Нед. 8',  period: '16-22 фев',     google: 89,  meta: 250, kolesa: 366, dealers: 89,  other: 44,  total: 838  },
   { week: 'Нед. 9',  period: '23 фев-1 мар',  google: 99,  meta: 311, kolesa: 415, dealers: 78,  other: 98,  total: 1001 },
   { week: 'Нед. 10', period: '2-8 мар',       google: 73,  meta: 124, kolesa: 362, dealers: 191, other: 7,   total: 757  },
   { week: 'Нед. 11', period: '9-15 мар',      google: 130, meta: 309, kolesa: 405, dealers: 85,  other: 64,  total: 993  },
-  { week: 'Нед. 12-13', period: '16-29 мар',  google: 313, meta: 648, kolesa: 811, dealers: 53,  other: 574, total: 2399 },
+  { week: 'Нед. 12-13', period: '16-29 мар',  google: 210, meta: 513, kolesa: 709, dealers: 37,  other: 86,  total: 1555 },
 ];
+
+
 
 const leadsChartData = weeklyComparison.map(w => ({
   week: w.week,
@@ -40,40 +44,40 @@ const totalLeadsChartData = weeklyComparison.map(w => ({
   'Всего заявок': w.total,
 }));
 
-// ===== ВОРОНКА ПО КАНАЛАМ — НЕДЕЛЯ 12-13 =====
+// ===== ВОРОНКА ПО КАНАЛАМ — НЕДЕЛЯ 12-13 (УНИКАЛЬНЫЕ ПО БИН) =====
 const channelTotals = [
   {
     channel: 'Google Ads',
     impressions: 15275, clicks: 3087, ctr: 20.21,
-    leads: 313, consents: 80, approved: 20,
+    leads: 210, consents: 75, approved: 19,
     cost: 1313.36,
     note: null,
   },
   {
     channel: 'Meta Ads',
     impressions: 207202, clicks: 1060, ctr: 0.51,
-    leads: 648, consents: 257, approved: 15,
+    leads: 513, consents: 220, approved: 14,
     cost: 1185.20,
     note: null,
   },
   {
     channel: 'Kolesa DM',
     impressions: null, clicks: null, ctr: null,
-    leads: 811, consents: 811, approved: 79,
+    leads: 709, consents: 212, approved: null,
     cost: null,
-    note: 'Партнерский источник (33.8% всех заявок)',
+    note: 'Партнерский источник (45.6% уникальных заявок)',
   },
   {
     channel: 'Zoomlion',
     impressions: 68986, clicks: 417, ctr: 0.60,
-    leads: 45, consents: 11, approved: 3,
+    leads: 27, consents: 10, approved: 3,
     cost: null,
     note: 'Пуши (248 кликов) + Баннеры (169 кликов)',
   },
   {
     channel: 'Дилеры',
     impressions: null, clicks: null, ctr: null,
-    leads: 53, consents: 31, approved: 3,
+    leads: 37, consents: 28, approved: 3,
     cost: null,
     note: 'UTM dealer',
   },
@@ -345,10 +349,11 @@ export default function AnalyticsMarchW1213() {
             <div>
               <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Методология</h3>
               <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
-                <li>• <strong>Согласия:</strong> CRM поле МЕТОДИКА не пусто (837 = 34.9%)</li>
-                <li>• <strong>Одобрено:</strong> UTM approval_status = APPROVED (117 = 4.9%)</li>
-                <li>• <strong>Kolesa DM:</strong> Партнерский источник, 811 заявок (33.8% всего трафика)</li>
-                <li>• <strong>Zoomlion:</strong> Маркетинговые активности (пуши + баннеры)</li>
+                <li>• <strong>Дедупликация:</strong> По БИН/ИИН, уникальные заявки: 1,555 (вместо 2,399)</li>
+                <li>• <strong>Согласия:</strong> CRM поле МЕТОДИКА не пусто (558 = 35.9% от уникальных)</li>
+                <li>• <strong>Одобрено:</strong> UTM approval_status = APPROVED (39 = 7.0% от согласий)</li>
+                <li>• <strong>Kolesa DM:</strong> 709 уникальных заявок (45.6%), согласия: 212 (29.9%)</li>
+                <li>• <strong>Zoomlion:</strong> 27 уникальных заявок, маркетинговые активности (пуши + баннеры)</li>
                 <li>• <strong>Период:</strong> 16-29 марта 2026</li>
               </ul>
             </div>
