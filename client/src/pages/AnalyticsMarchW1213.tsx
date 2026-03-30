@@ -63,7 +63,7 @@ const channelTotals = [
   {
     channel: 'Kolesa DM',
     impressions: null, clicks: null, ctr: null,
-    leads: 709, consents: 212, approved: null,
+    leads: 709, consents: 212, approved: 19,
     cost: null,
     note: 'Партнерский источник (45.6% уникальных заявок)',
   },
