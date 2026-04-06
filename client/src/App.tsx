@@ -14,6 +14,7 @@ import AnalyticsFebruaryW9 from "@/pages/AnalyticsFebruaryW9";
 import AnalyticsMarchW10 from "@/pages/AnalyticsMarchW10";
 import AnalyticsMarchW11 from "@/pages/AnalyticsMarchW11";
 import AnalyticsMarchW1213 from "@/pages/AnalyticsMarchW1213";
+import AnalyticsAprilW14 from "@/pages/AnalyticsAprilW14";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/analytics-march-w10" component={AnalyticsMarchW10} />
       <Route path="/analytics-march-w11" component={AnalyticsMarchW11} />
       <Route path="/analytics-march-w12-13" component={AnalyticsMarchW1213} />
+      <Route path="/analytics-april-w14" component={AnalyticsAprilW14} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
